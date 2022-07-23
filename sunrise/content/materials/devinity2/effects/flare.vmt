@@ -1,0 +1,7 @@
+"UnlitGeneric"
+{
+	"$basetexture" "devinity2/effects/flare"
+	"$additive" "1"
+	"$vertexcolor" 1
+	"$vertexalpha" 1
+}

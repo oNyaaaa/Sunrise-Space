@@ -1,0 +1,12 @@
+"sunrise"
+{
+	"base"		"base"
+	"title"		"Sunrise"
+	"category"	"other"
+	"maps"		"^gm_"
+	"menusystem"	"1"
+
+	"settings"
+	{
+	}
+}

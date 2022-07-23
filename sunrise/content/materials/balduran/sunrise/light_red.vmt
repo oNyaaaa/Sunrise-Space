@@ -1,0 +1,5 @@
+"UnlitGeneric"
+{
+	"$basetexture" "balduran/sunrise/light_red"
+	"$selfillum" 1
+}

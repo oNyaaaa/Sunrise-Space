@@ -1,0 +1,217 @@
+Male:
+	Under Attack:
+		vo/canals/male01/stn6_shellingus.wav "THEY'RE SHELLING US!"
+		vo/Citadel/br_no.wav "NO!"
+		vo/Citadel/br_ohshit.wav "Oohhh SHIT!"
+		vo/coast/cardock/le_whohurt.wav "Who's hurt?"
+		vo/coast/odessa/male01/nlo_cubdeath01.wav "No! NO!"
+		vo/coast/odessa/male01/nlo_cubdeath02.wav "NOO!"
+		vo/npc/Barney/ba_damnit.wav "Damn it!"
+		vo/npc/Barney/ba_pain01.wav (01-10)
+		vo/npc/male01/gethellout.wav "GET THE HELL OUT OF HERE!"
+		vo/npc/male01/gordead_ans04.wav "Oh god D:"
+		vo/npc/male01/gordead_ans05.wav "Oh no!"
+		vo/npc/male01/gordead_ans06.wav "Please... no..."
+		vo/npc/male01/gordead_ques10.wav "This is bad"
+		vo/npc/male01/help01.wav "HELP!"
+		vo/npc/male01/hitingut01.wav "Ugh, hit in the gut"
+		vo/npc/male01/hitingut02.wav
+		vo/npc/male01/imhurt01.wav "I'm hurt!"
+		vo/npc/male01/imhurt02.wav
+		vo/npc/male01/myarm01.wav 
+		vo/npc/male01/myarm02.wav
+		vo/npc/male01/mygut02.wav
+		vo/npc/male01/myleg01.wav
+		vo/npc/male01/myleg02.wav
+		vo/npc/male01/ohno.wav "Oh no!"
+		vo/npc/male01/no01.wav "No, NO!"
+		vo/npc/male01/ow01.wav
+		vo/npc/male01/ow02.wav
+		vo/npc/male01/pain01.wav (01-09)
+		vo/npc/male01/startle01.wav *Gasp*
+		vo/npc/male01/startle02.wav
+		vo/npc/male01/strider_run.wav "Ruun!"
+		vo/npc/male01/watchout.wav "Watch out!"
+
+
+	Idle:
+		vo/canals/boxcar_go_nag01.wav "Keep going now"
+		vo/canals/boxcar_go_nag03.wav "Get out of here"
+		vo/canals/boxcar_go_nag04.wav "Hit the road Jack"
+		vo/canals/gunboat_goonout.wav "Go on out"
+		vo/canals/shanty_go_nag01.wav "Get out of here" (Different)
+		vo/coast/odessa/male01/nlo_cheer03.wav *Manic Laughter*
+		vo/k_lab/ba_guh.wav "Ugh..."
+		vo/k_lab/ba_whoops.wav "Woops"
+		vo/npc/male01/doingsomething.wav "Shouldn't we be... uh, doing something?"
+		vo/npc/male01/gordead_ans01.wav "Now what?"
+		vo/npc/male01/gordead_ans19.wav "I'm gonna be sick!"
+		vo/npc/male01/gordead_ques16.wav "What now?"
+		vo/npc/male01/littlecorner01.wav "I've got my little corner and i'm sticking to it"
+		vo/npc/male01/moan01.wav (01-05) *Moan, barely audible"
+		vo/npc/male01/question02.wav "To think all i wanted to do is sell insurances"
+		vo/npc/male01/question05.wav "Whoa.. Deja Vu"
+		vo/npc/male01/question06.wav "Sometimes... i dream about cheese"
+		vo/npc/male01/question09.wav "I could eat a horse, hooves and all"
+		vo/npc/male01/question11.wav "I'm pretty sure this wasn't part of the plan"
+		vo/npc/male01/question13.wav "If i could live my life over again..."
+		vo/npc/male01/question22.wav "Dosen't anyone care what i think?"
+		vo/npc/male01/question23.wav "I can't get this tune out of my head *Whistles*
+		vo/npc/male01/question27.wav "ugh...I think i ate something bad"
+		vo/npc/male01/question26.wav "This is bullshit!"
+		vo/npc/male01/question28.wav "God, i'm hungry!"
+		vo/npc/male01/uhoh.wav "Uh-oh!"
+		vo/npc/male01/vanswer14.wav "What did i do to deserve this?"
+		vo/npc/male01/waitingsomebody.wav "You waiting for somebody?"
+		vo/npc/male01/whoops01.wav "Whoops"
+
+
+	Use:
+
+		vo/canals/male01/stn6_go_nag02.wav "GO ON!"
+		vo/canals/gunboat_getin.wav "Go on, get in here"
+		vo/canals/gunboat_herelook.wav "Here, take a look at this"
+		vo/canals/shanty_hey.wav "Hey!"
+		vo/coast/bugbait/sandy_youthere.wav "You there!"
+		vo/npc/male01/answer05.wav "Can we talk about this later?"
+		vo/npc/male01/answer25.wav "How about that"
+		vo/npc/male01/answer30.wav "You talking to me?"
+		vo/npc/male01/busy02.wav "Can't you see i'm busy?"
+		vo/npc/male01/gordead_ans15.wav "Well... Now what?"
+		vo/npc/male01/hi01.wav "Hi"
+		vo/npc/male01/hi02.wav
+		vo/npc/male01/squad_affirm03.wav "Whatever you say"
+		vo/npc/male01/vanswer05.wav "Speak english!"
+		vo/npc/male01/vquestion01.wav "Stop looking at me like that"
+		vo/trainyard/male01/cit_foodline02.wav "You have to wait your turn like everybody else"
+		vo/trainyard/male01/cit_pedestrian01.wav "New in town, aren't ya?"
+
+
+	Post use:
+		vo/canals/boxcar_go_nag04.wav "Hit the road Jack"
+		vo/canals/gunboat_goonout.wav "Go on out"
+		vo/eli_lab/airlock_cit01.wav "Good to know you"
+		vo/k_lab/ba_thingaway01.wav "Here we go..."
+		vo/npc/male01/answer03.wav "Figures"
+		vo/npc/male01/answer37.wav "You sure about that?"
+		vo/npc/male01/answer32.wav "Right on"
+		vo/npc/male01/fantastic01.wav "Fantastic!"
+		vo/npc/male01/fantastic02.wav
+		vo/npc/male01/finally.wav "Finally"
+		vo/npc/male01/holddownspot01.wav "I'm gonna stay... aaand hold down this spot"
+		vo/npc/male01/holddownspot02.wav
+		vo/npc/male01/illstayhere01.wav "I'll stay here"
+		vo/npc/male01/imstickinghere01.wav "I'm sticking here"
+		vo/npc/male01/nice.wav "Nice!"
+		vo/npc/male01/oneforme.wav "One for me and one... for me"
+		vo/npc/male01/vanswer01.wav "Enough of your mumbo-jumbo"
+		vo/npc/male01/vanswer03.wav "I'm not sure how to take that"
+		vo/npc/male01/vanswer04.wav "Should i take that... personally?"
+		vo/npc/male01/vanswer07.wav "That's why we put up with you"
+		vo/npc/male01/yeah02.wav "Yeah!"
+
+
+Female:
+
+	Under Attack:
+		vo/canals/arrest_helpme.wav "Help me!"
+		vo/canals/arrest_stop.wav "Stop, we didn't do anything!"
+		vo/coast/odessa/female01/nlo_cubdeath01.wav "No! NO!"
+		vo/coast/odessa/female01/nlo_cubdeath02.wav "NOO!"
+		vo/npc/Alyx/gasp02.wav
+		vo/npc/Alyx/gasp03.wav
+		vo/npc/Alyx/hurt04.wav
+		vo/npc/Alyx/hurt05.wav
+		vo/npc/Alyx/hurt06.wav
+		vo/npc/Alyx/hurt08.wav
+		vo/npc/Alyx/uggh01.wav
+		vo/npc/Alyx/uggh02.wav
+		vo/npc/female01/goodgod.wav "Good god D:"
+		vo/npc/female01/gordead_ans05.wav "Oh no!"
+		vo/npc/female01/gordead_ans06.wav "Please no!"
+		vo/npc/female01/gordead_ans14.wav "We're done for"
+		vo/npc/female01/gordead_ques10.wav "This... is bad"
+		vo/npc/female01/help01.wav "Help!"
+		vo/npc/female01/hitingut01.wav
+		vo/npc/female01/hitingut02.wav
+		vo/npc/female01/myarm01.wav
+		vo/npc/female01/myarm02.wav
+		vo/npc/female01/myleg01.wav
+		vo/npc/female01/myleg02.wav
+		vo/npc/female01/mygut02.wav
+		vo/npc/female01/no01.wav "No!"
+		vo/npc/female01/no02.wav
+		vo/npc/female01/ohno.wav "Oh no!"
+		vo/npc/female01/ow01.wav
+		vo/npc/female01/ow02.wav
+		vo/npc/female01/pain01.wav (01-09)
+		vo/npc/female01/startle01.wav *Gasp*
+		vo/npc/female01/strider_run.wav "Run!"
+		vo/npc/female01/uhoh.wav "Uh-oh"
+		vo/npc/female01/watchout.wav "Watch out!"
+
+
+
+	Idle:
+		vo/coast/odessa/female01/nlo_cheer02.wav "Wooohooo!"
+		vo/eli_lab/al_hums.wav *Humming*
+		vo/eli_lab/al_hums_b.wav
+		vo/NovaProspekt/al_uhoh_np.wav "Uh-oh"
+		vo/npc/female01/doingsomething.wav "Shouldn't we be... doing something?"
+		vo/npc/female01/gordead_ans19.wav "I'm gonna be sick..."
+		vo/npc/female01/littlecorner01.wav "I've got my little corner and i'm sticking to it"
+		vo/npc/female01/moan01.wav (01-05 *Quiet moan, barely audible*)
+		vo/npc/female01/question02.wav "To think all i wanted to do is sell insurances"
+		vo/npc/female01/question05.wav "Whoa... Deja Vu"
+		vo/npc/female01/question06.wav Cheese :P
+		vo/npc/female01/question09.wav "I could eat a horse, hooves and all"
+		vo/npc/female01/question11.wav "I'm pretty sure this wasn't part of the plan"
+		vo/npc/female01/question13.wav "If i could live my life over again..."
+		vo/npc/female01/question22.wav "Dosen't anyone care what i think?"
+		vo/npc/female01/question23.wav "I can't get this tune out of my head *Whistles*
+		vo/npc/female01/question27.wav "ugh...I think i ate something bad"
+		vo/npc/female01/question26.wav "This is bullshit!"
+		vo/npc/female01/question28.wav "God, i'm hungry!"
+		vo/npc/female01/vanswer14.wav "What did i do to deserve this?"
+		vo/npc/female01/waitingsomebody.wav "You... waiting for somebody?"
+		vo/npc/female01/whoops01.wav "Whoops..."
+
+
+	Use:
+		vo/npc/female01/busy02.wav "Can't you see i'm busy?"
+		vo/npc/female01/gordead_ans01.wav "Now what?"
+		vo/npc/female01/gordead_ans15.wav "Well..."
+		vo/npc/female01/gordead_ques16.wav "What now?"
+		vo/npc/female01/hi01.wav "Hi"
+		vo/npc/female01/hi02.wav
+		vo/npc/female01/readywhenyouare01.wav "Ready when you are"
+		vo/npc/female01/readywhenyouare02.wav
+		vo/npc/female01/squad_affirm03.wav "Whatever you say"
+		vo/npc/female01/squad_approach04.wav "Coming"
+		vo/npc/female01/vanswer05.wav "Speak english!"
+		vo/npc/female01/vquestion01.wav "Stop looking at me like that"
+		vo/npc/female01/yeah02.wav "Yeah"
+		vo/trainyard/female01/cit_foodline02.wav "You have to wait your turn like everybody else"
+		vo/trainyard/female01/cit_pedestrian01.wav "New in town, aren't ya?"
+
+
+	Post Use:
+		vo/eli_lab/al_awesome.wav "Awesome!"
+		vo/canals/female01/stn6_go_nag02.wav "GO ON!"
+		vo/eli_lab/al_sweet.wav "Sweet"
+		vo/npc/female01/answer32.wav "Right on"
+		vo/npc/female01/answer38.wav "You sure about that?"
+		vo/npc/female01/fantastic01.wav "Fantastic"
+		vo/npc/female01/fantastic02.wav
+		vo/npc/female01/illstayhere01.wav "I'll stay here"
+		vo/npc/female01/imstickinghere01.wav "I'm sticking here"
+		vo/npc/female01/nice01.wav "Nice"
+		vo/npc/female01/nice02.wav
+		vo/npc/female01/ok01.wav "Ok"
+		vo/npc/female01/ok02.wav
+		vo/npc/female01/thislldonicely01.wav "This'll do nicely"
+		vo/npc/female01/vanswer01.wav "Enough of your mumbo-jumbo"
+		vo/npc/female01/vanswer03.wav "I'm not sure how to take that"
+		vo/npc/female01/vanswer04.wav "Should i take that... personally?"
+		vo/npc/female01/vanswer07.wav "That's why we put up with you"
+

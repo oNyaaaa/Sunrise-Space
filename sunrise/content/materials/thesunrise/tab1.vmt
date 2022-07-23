@@ -1,0 +1,8 @@
+"UnlitGeneric"
+{
+	"$basetexture"	"thesunrise/tab1"
+	"$vertexcolor"	"1"
+	"$vertexalpha"	"1"
+	"$translucent"	"1"
+	"$nolod"		"1"
+}

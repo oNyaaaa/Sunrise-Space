@@ -1,0 +1,9 @@
+ENT.Type				= "anim"
+ENT.Base				= "base_anim"
+ENT.Author				= "Sunrise team"
+ENT.Purpose				= "For the Sunrise gamemode"
+ENT.Contact				= "PM one of the sunrise member on FP"
+ENT.PrintName			= "Player ship"
+ENT.Category			= "Sunrise"
+ENT.Spawnable			= false
+ENT.AdminSpawnable		= false

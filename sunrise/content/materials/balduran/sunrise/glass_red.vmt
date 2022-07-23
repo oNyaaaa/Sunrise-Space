@@ -1,0 +1,15 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "balduran/sunrise/glass_red"
+	"$envmap" "Models\props_combine\combine_light001a_mask.vtf"
+	"$envmaptint" "[1 1 1]"
+	"$envmapcontrast" "0.1"
+	"$selfillum" 1
+	"$normalmapalphaenvmapmask" "Models\props_combine\combine_light001a_mask.vtf"
+	"$phong"				"1"
+	"$halflambert"			"1"
+ 	"$phongexponent"		"60"
+ 	"$phongboost"			"2"
+ 	"$phongfresnelranges"	"[.5 .8 1]"
+	"$alphatest"			"1"
+}
