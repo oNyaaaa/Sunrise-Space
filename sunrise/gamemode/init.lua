@@ -5,6 +5,11 @@ include("shared.lua")
 
 AddCSLuaFile("hud/hud.lua")
 
+include("dock/docking.lua")
+
+util.AddNetworkString("sun_openundockmenu")
+util.AddNetworkString("sun_opendockmenu")
+
 GM.Folder = "sunrise"
 
 local SpawnOffset = 500
@@ -12,6 +17,7 @@ local SpawnOffset = 500
 function GM:PlayerSpawn(ply)
     ply:SetNWInt("DeathTimer",60)
     ply:SetCollisionGroup(COLLISION_GROUP_WEAPON)
+    ply.cDock = false
     ply.ent = ents.Create("sr_playership")
     local pos = ""
 		for _,v in pairs(ents.FindByClass("sunrise_station")) do
@@ -41,3 +47,25 @@ end
 function GM:PlayerDeath(ply,inf,attk)
     if ply.ent then ply.ent:Remove() end
 end
+
+timer.Create("Tick", 60, 0, function()
+    for k,v in pairs(player.GetAll()) do
+        v.cDock = false
+    end
+end)
+
+hook.Add("Tick", "529391239", function()
+    for k,v in pairs(ents.FindByClass("sunrise_station")) do
+        for _,ply in pairs(ents.FindInSphere(v:GetPos(), 200)) do
+            if ply:IsPlayer() then 
+                if ply.Timerz_Dock == nil then ply.Timerz_Dock = 0 end
+                if CurTime() >= ply.Timerz_Dock then
+                    ply.Timerz_Dock = CurTime() + 10
+                        net.Start("sun_opendockmenu")
+                        net.Send(ply)
+                    ply.cDock = true
+                end
+            end
+        end
+    end
+end)

@@ -122,8 +122,8 @@ end
 function ENT:AcceptInput(inp,ply,caller)    
 	if inp == "Use" and ply:IsPlayer() and ply:KeyPressed(32) then
 		ply.CanUndock = true
-		umsg.Start("sun_openundockmenu",ply)
-		umsg.End()
+		net.Start("sun_openundockmenu")
+        net.Send(ply)
 		if self.NextRandomSound <= CurTime() and self.NextSound <= CurTime() and self.NextDamageSound <= CurTime() then
 			local sound = table.Random(self.UseSounds)
 			self:EmitSound(sound,100,100)

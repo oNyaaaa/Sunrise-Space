@@ -18,6 +18,7 @@ end
 
 function ENT:Die(a)
 	local ply = self:GetOwner_OfShip()
+	if not IsValid(ply) then return end
 	local e = ents.Create("sunrise_wreck")
 	//local MoneyLose = math.Round(ply:GetMoney()/10)
 	//e:SetMoney(MoneyLose)
