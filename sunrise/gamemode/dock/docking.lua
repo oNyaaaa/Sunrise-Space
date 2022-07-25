@@ -19,9 +19,13 @@ local dockmdls = {
 }
 
 function meta:Dock()
-
+	local ship = self
 	local spawn = table.Random(ents.FindByClass("sunrise_playerdockspawn"))
-
+	local ships = ship.ent
+	local phys = ships:GetPhysicsObject()
+	if IsValid(phys) then
+		phys:SetVelocity(self:GetForward() * 0)
+	end
 	self:SetNWBool("Docked",true)
 	self.SpawnShip = false
 	self:UnSpectate()
@@ -36,20 +40,20 @@ function meta:Dock()
 
 	self:SetPos(spawn:GetPos())
 
-	
+	self.cDock = true
 end
 
 function meta:UnDock()
 	local ship = self
 	self:StripWeapons()
 	self:StripAmmo()
-	//if ship and ship:IsValid() then
-		//ship:GetPhysicsObject():Wake()
+	if ship.ent and ship.ent:IsValid() then
+		//ship.ent:GetPhysicsObject():Wake()
 		//ship:SetPlayer(self)
 		self:SetNWBool("Docked",false)
 		//ship.UnDockTimer = CurTime()+10
 		//Wreturn
-	//end
+	end
 	self:SetNWBool("Docked",false)
 	//self:Spectate( OBS_MODE_CHASE )
 	//self:SpectateEntity( ship.ent )
@@ -60,7 +64,8 @@ function meta:UnDock()
 	//ship:Spawn()
 	//ship:Activate()
 	self:Spectate( OBS_MODE_CHASE )
-	self:SpectateEntity( ship.ent )
+	self:SpectateEntity( self.ent )
+	self.cDock = false
 	//self:SetShip(ship)
 end
 
@@ -74,9 +79,9 @@ end
 concommand.Add("sun_dodock",Sun_DoDock)
 
 function Sun_StopDock(ply)
-	local ship = self:GetOwner_OfShip()
+	local ship = ply //self:GetOwner_OfShip()
 	ship.WantsToDock = false
-	ship:SetDocked(false)
+	//ship:SetDocked(false)
 	ship.WantsToDock = false
 	ship.UnDockTimer = CurTime()+10
 end

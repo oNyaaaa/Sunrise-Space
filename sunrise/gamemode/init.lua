@@ -1,7 +1,10 @@
 AddCSLuaFile("shared.lua")
 AddCSLuaFile("cl_init.lua")
+AddCSLuaFile("cargo/cl_cargo.lua")
+
 
 include("shared.lua")
+include("cargo/sv_cargo.lua")
 
 AddCSLuaFile("hud/hud.lua")
 
@@ -36,9 +39,9 @@ function GM:PlayerSpawn(ply)
 	ply:SpectateEntity( ply.ent )
 end
 
-
-
 local meta = FindMetaTable("Entity")
+
+function GM:CanPlayerSuicide() return false end
 
 function meta:GetOwner_OfShip()
     return self.GetShipOwner
@@ -46,6 +49,7 @@ end
 
 function GM:PlayerDeath(ply,inf,attk)
     if ply.ent then ply.ent:Remove() end
+    ply.cDock = false
 end
 
 timer.Create("Tick", 60, 0, function()
@@ -60,10 +64,9 @@ hook.Add("Tick", "529391239", function()
             if ply:IsPlayer() then 
                 if ply.Timerz_Dock == nil then ply.Timerz_Dock = 0 end
                 if CurTime() >= ply.Timerz_Dock then
-                    ply.Timerz_Dock = CurTime() + 10
-                        net.Start("sun_opendockmenu")
-                        net.Send(ply)
-                    ply.cDock = true
+                    ply.Timerz_Dock = CurTime() + 5
+                    net.Start("sun_opendockmenu")
+                    net.Send(ply)
                 end
             end
         end

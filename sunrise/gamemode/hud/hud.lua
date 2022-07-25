@@ -152,10 +152,11 @@ local function DrawSpaceObjects()
 		end
 	end*/
 end
-
+local DermaPanel = NULL 
 function Sun_OpenDockMenu(um)
-
-	local DermaPanel = vgui.Create( "DFrame" )
+	if DermaPanel and IsValid(DermaPanel) then return end
+	DermaPanel = vgui.Create( "DFrame" )
+	
 	local Width = 150
 	local Height = 75
 	DermaPanel:SetPos(((ScrW() - Width) * 0.5),((ScrH() - Height) * 0.5))
@@ -166,13 +167,13 @@ function Sun_OpenDockMenu(um)
 	DermaPanel:ShowCloseButton(false)
 	DermaPanel:MakePopup()
 
-local DPO = vgui.Create( "DPanel", DermaPanel )
-	DPO:SetPos( DPO:GetWide()-56, DPO:GetTall() )
-	DPO:SetSize( 135, 45 )
-	DPO.Paint = function()
-		surface.SetDrawColor( 0, 0, 0, 255 )
-		surface.DrawRect( 0, 3, DPO:GetWide(), DPO:GetTall() )
-end
+	local DPO = vgui.Create( "DPanel", DermaPanel )
+		DPO:SetPos( DPO:GetWide()-56, DPO:GetTall() )
+		DPO:SetSize( 135, 45 )
+		DPO.Paint = function()
+			surface.SetDrawColor( 0, 0, 0, 255 )
+			surface.DrawRect( 0, 3, DPO:GetWide(), DPO:GetTall() )
+	end
 
 	
 	local Yes = vgui.Create( "DButton" )
@@ -183,6 +184,7 @@ end
 	Yes.DoClick = function ()
 		RunConsoleCommand("sun_dodock")
 		DermaPanel:Close()
+		DermaPanel = NULL 
 	end
 	
 	local No = vgui.Create("DButton")
@@ -193,25 +195,26 @@ end
 	No.DoClick = function ()
 		RunConsoleCommand("sun_stopdock")
 		DermaPanel:Close()
+		DermaPanel = NULL 
 	end
 
 end
 net.Receive("sun_opendockmenu",Sun_OpenDockMenu)
-
+local DermaPanel2 = NULL 
 function Sun_OpenUndockMenu(um)
-
-	local DermaPanel = vgui.Create( "DFrame" )
+	if DermaPanel2 and IsValid(DermaPanel2) then return end
+	local DermaPanel2 = vgui.Create( "DFrame" )
 	local Width = 150
 	local Height = 75
-	DermaPanel:SetPos(((ScrW() - Width) * 0.5),((ScrH() - Height) * 0.5))
-	DermaPanel:SetSize(Width, Height)
-	DermaPanel:SetTitle("Do you want to undock?")
-	DermaPanel:SetVisible(true)
-	DermaPanel:SetDraggable(false)
-	DermaPanel:ShowCloseButton(false)
-	DermaPanel:MakePopup()
+	DermaPanel2:SetPos(((ScrW() - Width) * 0.5),((ScrH() - Height) * 0.5))
+	DermaPanel2:SetSize(Width, Height)
+	DermaPanel2:SetTitle("Do you want to undock?")
+	DermaPanel2:SetVisible(true)
+	DermaPanel2:SetDraggable(false)
+	DermaPanel2:ShowCloseButton(false)
+	DermaPanel2:MakePopup()
 
-local DPO = vgui.Create( "DPanel", DermaPanel )
+local DPO = vgui.Create( "DPanel", DermaPanel2 )
 	DPO:SetPos( DPO:GetWide()-56, DPO:GetTall() )
 	DPO:SetSize( 135, 45 )
 	DPO.Paint = function()
@@ -220,22 +223,24 @@ local DPO = vgui.Create( "DPanel", DermaPanel )
 end
 
 	
-	local Yes = vgui.Create("DButton",DermaPanel)
+	local Yes = vgui.Create("DButton",DermaPanel2)
 	Yes:SetText( "Yes" )
 	Yes:SetPos( 15, 30 )
 	Yes:SetSize( 55, 35 )
 	Yes.DoClick = function()
-	RunConsoleCommand("sun_doundock")
-		DermaPanel:Close()
+		RunConsoleCommand("sun_doundock")
+		DermaPanel2:Close()
+		DermaPanel2 = NULL
 	end
 	
-	local No = vgui.Create("DButton",DermaPanel)
+	local No = vgui.Create("DButton",DermaPanel2)
 	No:SetText( "No" )
 	No:SetPos( 80, 30  )
 	No:SetSize( 55 , 35 )
 	No.DoClick = function()
 		RunConsoleCommand("sun_stopundock")
-		DermaPanel:Close()
+		DermaPanel2:Close()
+		DermaPanel2 = NULL
 	end
 end
 net.Receive("sun_openundockmenu",Sun_OpenUndockMenu)

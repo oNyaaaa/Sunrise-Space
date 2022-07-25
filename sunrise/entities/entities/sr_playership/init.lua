@@ -57,6 +57,10 @@ end
 function ENT:Think()
     local ship = self:GetOwner_OfShip()
     local phys = self:GetPhysicsObject()
+	if ship:GetNWBool("Docked",false) == true then
+		phys:SetVelocity(self:GetForward() * 0)
+        return
+    end
     if IsValid(ship) and IsValid(phys) then
         if ship:KeyDown(IN_ATTACK2) and not ship:KeyDown(IN_FORWARD) then
             self:SetAngles(ship:EyeAngles())
@@ -69,7 +73,6 @@ function ENT:Think()
             phys:SetVelocity(self:GetForward() * 100)
         end
         if ship:KeyDown(IN_BACK) then
-            local phys = self:GetPhysicsObject()
             phys:SetVelocity(self:GetForward() * 0)
         end
     end

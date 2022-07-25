@@ -195,8 +195,144 @@ concommand.Add("sun_openhelp",function()
 	
 end)
 
+//
+
+local QMenu
+
+function QMenuPad()
+    QMenu = vgui.Create( "DFrame" )
+    QMenu:SetTitle( "" )
+    QMenu:ShowCloseButton( true )
+    QMenu:SetPos(((ScrW() - 700) * 0.5),((ScrH() - 500) * 0.5))
+	QMenu:SetSize(700, 500)
+    QMenu:SetDraggable( false )
+	QMenu.Paint = function() end
+	QMenu.OnClose = function() gui.EnableScreenClicker( false ) QMenu = nil end
+	
+	QMenu.Tabs = vgui.Create( "DPropertySheet")
+	QMenu.Tabs:SetParent( QMenu )
+	QMenu.Tabs:SetPos( 5, 30 )
+	QMenu.Tabs:SetSize( 690, 462 )
+	
+	QMenu.Inventory = vgui.Create("DPanel", QMenu.Tabs)
+	QMenu.Inventory:SetPos(5,5)
+	QMenu.Inventory:SetSize(590,390)
+	
+	QMenu.ItemList = vgui.Create("DListView", QMenu.Inventory)
+	QMenu.ItemList:SetPos(15, 15)
+	QMenu.ItemList:SetSize(490, 400)
+	QMenu.ItemList:SetMultiSelect(false)
+	QMenu.ItemList:AddColumn("Name")
+	QMenu.ItemList:AddColumn("Amount")
+	QMenu.ItemList.ItemUpdateList = function(self)
+		self:Clear()
+		//for k,v in pairs(Cargo) do
+			//if v > 0 then
+				self:AddLine("test","test")
+			//end
+		//end
+	end
+	
+	QMenu.ItemList:ItemUpdateList()
+	
+	local EquipButton = vgui.Create( "DButton", QMenu.Inventory )
+	EquipButton:SetText( "Equip" )
+	EquipButton:SetPos( 520, 25 )
+	EquipButton:SetSize( 150, 20 )
+	EquipButton.DoClick = function()
+		local item = QMenu.ItemList:GetSelected()[1]
+		if(item) then
+			RunConsoleCommand("sun_select",item:GetColumnText(1))
+		end
+	end
+	
+
+	QMenu.Fleets = vgui.Create("DPanel", QMenu.Tabs)
+	QMenu.Fleets:SetPos(5,5)
+	QMenu.Fleets:SetSize(590,390)
+	
+	QMenu.FleetList = vgui.Create("DListView", QMenu.Fleets)
+	QMenu.FleetList:SetPos(15, 15)
+	QMenu.FleetList:SetSize(490, 400)
+	QMenu.FleetList:SetMultiSelect(false)
+	QMenu.FleetList:AddColumn("Name")
+	QMenu.FleetList:AddColumn("Players")
+	QMenu.FleetList.FleetUpdateList = function(self)
+		self:Clear()
+		//for k,v in pairs(FLEETS) do
+			self:AddLine("test","test")//k, table.Count(v.Members))
+		//end
+	end
+	
+	QMenu.FleetList:FleetUpdateList()
+	
+	local FleetJoinButton = vgui.Create( "DButton", QMenu.Fleets )
+	FleetJoinButton:SetText( "Join" )
+	FleetJoinButton:SetPos( 520, 25 )
+	FleetJoinButton:SetSize( 150, 20 )
+	FleetJoinButton.DoClick = function()
+		local item = QMenu.FleetList:GetSelected()[1]
+		if(item) then
+			RunConsoleCommand("sun_JoinFleet",item:GetColumnText(1))
+		end
+	end
+	
+	local FleetCreateButton = vgui.Create( "DButton", QMenu.Fleets )
+	FleetCreateButton:SetText( "Create" )
+	FleetCreateButton:SetPos( 520, 60 )
+	FleetCreateButton:SetSize( 150, 20 )
+	FleetCreateButton.DoClick = function()
+		RunConsoleCommand("sun_CreateFleet")
+	end
+	
+	
+	
+	/*
+	QMenu.Stats = vgui.Create("DPanel", QMenu.Tabs)
+	QMenu.Stats:SetPos(5,5)
+	QMenu.Stats:SetSize(590,390)
+	*/
+	
+	
+	
+	
+    QMenu:SetVisible( false )
+	
+	QMenu.Tabs:AddSheet( "Inventory", QMenu.Inventory, "gui/silkicons/user", false, false )
+	QMenu.Tabs:AddSheet( "Fleets", QMenu.Fleets, "gui/silkicons/user", false, false )
+	
+	gui.SetMousePos( ScrW() / 2, ScrH() / 2 )
+ 
+end
+
+function HideQMenu() 
+	if QMenu then
+		QMenu:SetVisible( false )
+	else
+		QMenuPad()
+		QMenu:SetVisible( false )
+	end
+	gui.EnableScreenClicker( false )
+end
+ 
+function ShowQMenu()
+	if QMenu then
+		QMenu:SetVisible( true )
+		//QMenu.ItemList:ItemUpdateList()
+		//QMenu.FleetList:FleetUpdateList()
+	else
+		QMenuPad()
+		QMenu:SetVisible( true )
+	end
+	gui.EnableScreenClicker( true )
+end
+
+
 function GM:PlayerBindPress( ply, bind, pressed ) 
 	if bind == "gm_showhelp" then
         ply:ConCommand("sun_openhelp")
     end
+	if bind == "+menu" then
+       	ShowQMenu()
+	end
 end
