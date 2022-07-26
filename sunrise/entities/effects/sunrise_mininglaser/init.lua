@@ -5,16 +5,18 @@
 
 local Laser = Material("trails/physbeam")
 
+
+
 function EFFECT:Init(data)
 	self.Ent		= data:GetEntity()
 	self.EndPos		= data:GetStart()
 	self.Time		= CurTime()+3
 	self.StartPos	= self.Ent:GetPos()
 	self.Emitter	= ParticleEmitter(self.StartPos)
-	self:SetRenderBounds(-1*NilVect*100000,NilVect*100000)
+	self:SetRenderBounds(-1*Vector(-1)*100000,Vector(-1)*100000)
 	for k=3,9 do
 		local part = self.Emitter:Add("particle/light01",self.EndPos)
-		part:SetVelocity(ZeroVect)
+		part:SetVelocity(Vector(0))
 		part:SetDieTime(4)
 		part:SetStartAlpha(math.Rand(230, 250))
 		part:SetEndAlpha(0)
@@ -23,7 +25,6 @@ function EFFECT:Init(data)
 		part:SetRoll(math.Rand(20,80))
 		part:SetRollDelta(math.random(-1,1))
 		part:SetColor(255,120,0)
-		part:VelocityDecay(true)
 	end
 end
 

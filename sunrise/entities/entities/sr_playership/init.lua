@@ -53,6 +53,21 @@ function ENT:PhysicsCollide(data,physobj)
 	end
 end
 
+local Mins = Vector(-9,-10,-5)
+local Maxs = Vector(27,6,5)
+
+function ENT:GetTrace(ship,a)
+	// a <= 0 then return {} end
+	local ply = ship
+	local td = {}
+	td.start = self:GetPos()
+	td.endpos = self:GetPos()+(ply:GetAimVector()*(a or 500))
+	td.filter = {ply,self}
+	td.mins = Mins
+	td.maxs = Maxs
+	return util.TraceHull(td)
+end
+
 
 function ENT:Think()
     local ship = self:GetOwner_OfShip()
@@ -62,6 +77,9 @@ function ENT:Think()
         return
     end
     if IsValid(ship) and IsValid(phys) then
+		if ship:KeyDown(IN_ATTACK) then
+			WepShoot(self,ship)
+		end
         if ship:KeyDown(IN_ATTACK2) and not ship:KeyDown(IN_FORWARD) then
             self:SetAngles(ship:EyeAngles())
         end
