@@ -80,6 +80,11 @@ function ENT:Think()
 		if ship:KeyDown(IN_ATTACK) then
 			WepShoot(self,ship)
 		end
+		if ship:KeyDown(IN_SPEED) then
+			phys:SetVelocity(self:GetForward() * 500)
+			self:SetAngles(ship:EyeAngles())
+			return
+		end
         if ship:KeyDown(IN_ATTACK2) and not ship:KeyDown(IN_FORWARD) then
             self:SetAngles(ship:EyeAngles())
         end

@@ -74,6 +74,14 @@ local function DrawSpaceObjects()
 	if ply:GetNWBool("Docked",false) == true then
         return
     end
+	for _,v in pairs(ents.FindByClass("sunrise_pirate")) do
+		local spos2 = v:GetPos():ToScreen()
+		surface.SetDrawColor(222,8,8,167)
+		surface.DrawLine(spos2.x-2,spos2.y-5,spos2.x+2,spos2.y-5)
+		surface.DrawLine(spos2.x-2,spos2.y+5,spos2.x+2,spos2.y+5)
+		surface.DrawLine(spos2.x-5,spos2.y-2,spos2.x-5,spos2.y+2)
+		surface.DrawLine(spos2.x+5,spos2.y-2,spos2.x+5,spos2.y+2)
+	end
 	for _,v in pairs(ents.FindByClass("sunrise_asteroidfield")) do
 		local spos = v:GetPos():ToScreen()
 		//if ply:GetShip():GetTarget() == v then

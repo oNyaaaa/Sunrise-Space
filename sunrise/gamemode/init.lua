@@ -9,6 +9,7 @@ include("cargo/sv_cargo.lua")
 AddCSLuaFile("hud/hud.lua")
 
 include("dock/docking.lua")
+include("pirate/pirate.lua")
 
 util.AddNetworkString("sun_openundockmenu")
 util.AddNetworkString("sun_opendockmenu")

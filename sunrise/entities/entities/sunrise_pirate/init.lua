@@ -27,11 +27,11 @@ ENT.NextShield = 0
 ENT.Acceleration = 8
 
 function ENT:Initialize()
-	DebugPrint("Pirate Spawned")
+	//DebugPrint("Pirate Spawned")
 	self:SetModel("models/thesunrise/balduran/pirate_frig1.mdl")
 	
-	self:SetClass(GetRandomPirateShip())
-	
+	//self:SetClass(GetRandomPirateShip())
+	self.Pirate = true
 	self:PhysicsInit(SOLID_VPHYSICS)
 	self:SetMoveType(MOVETYPE_VPHYSICS)
 	self:SetSolid(SOLID_VPHYSICS)
@@ -76,20 +76,36 @@ function ENT:GetMaxSpeed()
 	return self.MaxSpeed
 end
 
+function ENT:FindTarget()
+	for _,v in pairs(ents.FindInSphere(self:GetPos(),2300)) do 
+		if v:GetClass() == "sr_playership" then //v != self and !v.Pirate then
+			self.Target = v
+			return v
+		end
+	end
+end
+
 function ENT:Think()
-	if self.NextShield <= CurTime() then
+	local targ = self:FindTarget()
+	if targ != NULL and IsValid(targ) and targ then
+		local phys = self:GetPhysicsObject()
+		self:SetAngles((targ:GetPos()-self:GetPos()):Angle())
+		phys:SetVelocity(self:GetForward() * 100)
+	end
+	///print(targ)
+	/*if self.NextShield <= CurTime() then
 		self.Shield = math.Clamp(self.Shield+1,0,100)
 		self.NextShield = CurTime()+0.5
 	end
 	/*if SUNRISE_AIDISABLED then
 		self.Target = nil
 		return
-	end*/
+	end`
 	if !self.Target or !self.Target:IsValid() then
 		self:FindTarget()
 		return
 	end
-	if self.Target and self.Target:GetHP() > 0 and !(self.Target.IsDocked and self.Target:IsDocked()) and self.Target:GetPos():Distance(self:GetPos()) < 3000 then
+	if self.Target and self.Target:GetHP() > 0 and !(self.Target:GetNWBool("Docked",false)) and self.Target:GetPos():Distance(self:GetPos()) < 3000 then
 		self:SetSpeed(math.Clamp(self:GetSpeed()+self.Acceleration,0,self.MaxSpeed))
 		if self:GetPos():Distance(self.Target:GetPos()) <= CW_GetWeaponRange(self.Weap) then
 			self:Shoot(self.Target)
@@ -103,17 +119,10 @@ function ENT:Think()
 	else
 		self:GetPhysicsObject():Wake()
 		//self:GetPhysicsObject():AddVelocity(NilVect)
-	end
+	end*/
 end
 
-function ENT:FindTarget()
-	for _,v in pairs(ents.FindInSphere(self:GetPos(),2300)) do 
-		if v.IsShip and v:GetHP() > 0 and !v:IsWarping() and v != self and !v.IsPirate then
-			self.Target = v
-			break
-		end
-	end
-end
+
 
 function ENT:IsWarping()
 	return false
@@ -136,7 +145,7 @@ function ENT:Shoot(ent)
 end
 
 function ENT:PhysicsUpdate(phys,dtime)
-	if !self.Target or !self.Target:IsValid() or self.Target:GetHP() < 1 then return end
+	/*if !self.Target or !self.Target:IsValid() then return end//or self.Target:GetHP() < 1 then return end
 	local Pos = self.Target:GetPos()
 	local Dist = self:GetPos():Distance(self.Target:GetPos())
 	local Ang
@@ -157,7 +166,14 @@ function ENT:PhysicsUpdate(phys,dtime)
 	pr.dampfactor		= 0.05
 	pr.teleportdistance	= 0
 	pr.deltatime		= deltatime
-	phys:ComputeShadowControl(pr)
+	phys:ComputeShadowControl(pr)*/
+end
+
+function ENT:PhysicsCollide(data,physobj)
+	local ent = data.HitEntity
+	if ent then
+		self:Die(ent or GetWorldEntity())
+	end
 end
 
 function ENT:Die(a)
@@ -176,7 +192,7 @@ function ENT:Die(a)
 	e:Spawn()
 	e:Activate()
 	
-	GAMEMODE:NPCKilled(self,a)
+	//GAMEMODE:NPCKilled(self,a)
 	self:Remove()
 end
 
