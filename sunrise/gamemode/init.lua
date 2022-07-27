@@ -15,9 +15,16 @@ util.AddNetworkString("sun_opendockmenu")
 
 GM.Folder = "sunrise"
 
-local SpawnOffset = 500
+hook.Add("PlayerConnect","Server", function()
+    if game.GetMap() != "sun_outer-edge" then
+        game.ConsoleCommand("changelevel sun_outer-edge\n")
+    end
+end)
+
+local SpawnOffset = 700
 
 function GM:PlayerSpawn(ply)
+    ply:CrosshairDisable()
     ply:SetNWInt("DeathTimer",60)
     ply:SetCollisionGroup(COLLISION_GROUP_WEAPON)
     ply.cDock = false
@@ -44,7 +51,9 @@ local meta = FindMetaTable("Entity")
 function GM:CanPlayerSuicide() return false end
 
 function meta:GetOwner_OfShip()
-    return self.GetShipOwner
+    local ply = self.GetShipOwner
+    ply:SetNWEntity("Ship",self)
+    return ply
 end
 
 function GM:PlayerDeath(ply,inf,attk)
@@ -60,7 +69,7 @@ end)
 
 hook.Add("Tick", "529391239", function()
     for k,v in pairs(ents.FindByClass("sunrise_station")) do
-        for _,ply in pairs(ents.FindInSphere(v:GetPos(), 200)) do
+        for _,ply in pairs(ents.FindInSphere(v:GetPos(), 100)) do
             if ply:IsPlayer() then 
                 if ply.Timerz_Dock == nil then ply.Timerz_Dock = 0 end
                 if CurTime() >= ply.Timerz_Dock then

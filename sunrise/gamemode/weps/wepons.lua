@@ -1,15 +1,17 @@
 local Weapons = {}
+local WepTbl = {}
 
 function Weapons.Add(tool,func)
-    local Weps = {}
-
-    table.insert(Weps,{tool,func})
-    return Weps
+    table.insert(WepTbl,{tool,func})
 end
 
-local WepTbl = Weapons.Add("Miner",function(self,ship)
-    //print(ship)
+Weapons.Add("Miner",function(self,ship)
+    if cooldown == nil then cooldown = 0 end
+    if cooldown >= CurTime() then return end
+    cooldown = CurTime() + 2
     local ent = self:GetTrace(ship)
+    if ent == NULL then return end
+    if not IsValid(ent.Entity) then return end
     if ent.Entity:GetPos():Distance(ship:GetPos()) <= 500 then
         local ed = EffectData()
         ed:SetEntity(ent.Entity)
@@ -20,5 +22,9 @@ local WepTbl = Weapons.Add("Miner",function(self,ship)
 end)
 
 function WepShoot(self,ply)
-    WepTbl[1][2](self,ply)
+    for k,v in pairs(WepTbl) do
+        if v[1] == "Miner" then
+            v[2](self,ply)
+        end
+    end
 end

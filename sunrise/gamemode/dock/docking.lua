@@ -6,16 +6,9 @@
 local meta = FindMetaTable("Player")
 
 local dockmdls = {
-	"models/player/Group01/male_02.mdl",
-	"models/player/Group01/Male_01.mdl",
-	"models/player/Group01/Female_01.mdl",
-	"models/player/Group01/male_09.mdl",
-	"models/player/Group01/male_07.mdl",
-	"models/player/Group01/Male_05.mdl",
-	"models/player/Group01/male_06.mdl",
-	"models/player/Group01/Female_07.mdl",
-	"models/player/Group01/male_08.mdl",
-	"models/player/Group01/Male_04.mdl"
+	"models/player/combine_soldier.mdl",
+	"models/player/police.mdl",
+	"models/player/combine_super_soldier.mdl",
 }
 
 function meta:Dock()
