@@ -342,6 +342,114 @@ function GM:PlayerBindPress( ply, bind, pressed )
 	end
 end
 
+SHIPS = {}
+
+GM.DefaultShip = "T1 Buzzfly Shuttle"
+
+function AddNewShip(name, cost, Model, Shield, Health, ViewDistance, MaxSpeed, CargoSize, Acceleration, WarpSpeed, WarpHeatAddition, DieSize, Skin, WreckModel, Man, Class)
+	local Ship = { name = name, cost = cost, Model = Model, Shield = Shield, Health = Health, ViewDistance = ViewDistance, MaxSpeed = MaxSpeed, CargoSize = CargoSize, Acceleration = Acceleration, WarpSpeed = WarpSpeed, WarpHeatAddition = WarpHeatAddition, DieSize = DieSize, Skin = Skin, WreckModel = WreckModel, Man = Man, Class = Class}
+	table.insert(SHIPS, Ship)
+	////DebugPrint("New Ship created. Name = "..name..", cost = "..cost..", Model = "..Model)
+end
+
+
+/*
+	Editing the NAMES of them will corrupt a player unless there are another 1 with the same name
+*/
+AddNewShip("T1 Buzzfly Shuttle", 0, "models/thesunrise/balduran/shuttle1-1.mdl", 100, 50, 20, 100, 20, 4, 800, 0.8, 1, 0, "models/thesunrise/shuttle_wreck.mdl", 1, 0)
+AddNewShip("T2 Buzzfly Shuttle", 1500, "models/thesunrise/balduran/shuttle1-2.mdl", 120, 70, 20, 100, 25, 4, 800, 0.8, 1, 2, "models/thesunrise/shuttle_wreck.mdl", 1, 0)
+AddNewShip("T3 Buzzfly Shuttle", 3000, "models/thesunrise/balduran/shuttle1-3.mdl", 150, 90, 20, 100, 30, 4, 800, 0.8, 1, 1, "models/thesunrise/shuttle_wreck.mdl", 1, 0)
+AddNewShip("T4 Buzzfly Shuttle", 4500, "models/thesunrise/balduran/shuttle1-4.mdl", 200, 110, 20, 110, 45, 4, 850, 0.8, 1, 0, "models/thesunrise/shuttle_wreck.mdl", 1, 0)
+AddNewShip("T1 Packmule Shuttle", 2500, "models/thesunrise/balduran/shuttle6-1.mdl", 50, 10, 20, 110, 35, 4, 900, 0.8, 1, 0, "models/thesunrise/balduran/shuttle6_wreck.mdl", 1, 0)
+AddNewShip("T1 Cobra Shuttle", 500, "models/thesunrise/balduran/shuttle2-1.mdl", 100, 40, 20, 150, 20, 5, 850, 0.8, 1, 0, "models/thesunrise/balduran/shuttle2_wreck.mdl", 1, 0)
+AddNewShip("T2 Cobra Shuttle", 1500, "models/thesunrise/balduran/shuttle2-2.mdl", 110, 40, 20, 200, 20, 5, 1000, 0.7, 1, 2, "models/thesunrise/balduran/shuttle2_wreck.mdl", 1, 0)
+AddNewShip("T3 Cobra Shuttle", 3000, "models/thesunrise/balduran/shuttle2-3.mdl", 120, 50, 20, 250, 20, 6, 1200, 0.6, 1, 2, "models/thesunrise/balduran/shuttle2_wreck.mdl", 1, 0)
+AddNewShip("T4 Cobra Shuttle", 4500, "models/thesunrise/balduran/shuttle2-4.mdl", 150, 60, 20, 300, 20, 7, 1400, 0.5, 1, 3, "models/thesunrise/balduran/shuttle2_wreck.mdl", 1, 0)
+AddNewShip("T1 Groundhog Shuttle", 1000, "models/thesunrise/balduran/shuttle3.mdl", 80, 40, 20, 80, 50, 4, 700, 0.8, 1, 2, "models/thesunrise/balduran/shuttle3_wreck.mdl", 1, 0)
+AddNewShip("T1 Talon Shuttle", 3500, "models/thesunrise/balduran/shuttle4.mdl", 200, 200, 20, 150, 10, 4, 1000, 0.7, 1, 0, "models/thesunrise/balduran/shuttle4_wreck.mdl", 1, 0)
+AddNewShip("T1 Kushan Frigate", 10000, "models/thesunrise/balduran/frigate1-1.mdl", 300, 200, 30, 320, 70, 16, 2400, 1, 1, 0, "models/thesunrise/frigate_wreck.mdl", 4, 1)
+AddNewShip("T2 Kushan Frigate", 16000, "models/thesunrise/balduran/frigate1-2.mdl", 350, 250, 30, 320, 80, 16, 2600, 1, 1, 2, "models/thesunrise/frigate_wreck.mdl", 4, 1)
+AddNewShip("T3 Kushan Frigate", 23000, "models/thesunrise/balduran/frigate1-3.mdl", 400, 300, 30, 360, 80, 16, 2800, 1, 1, 3, "models/thesunrise/frigate_wreck.mdl", 4, 1)
+AddNewShip("T4 Kushan Frigate", 35000, "models/thesunrise/balduran/frigate1-4.mdl", 450, 350, 30, 400, 90, 16, 3200, 1, 1, 1, "models/thesunrise/frigate_wreck.mdl", 4, 1)
+AddNewShip("T5 Kushan Frigate", 60000, "models/thesunrise/balduran/frigate1-5.mdl", 550, 450, 30, 600, 100, 16, 3600, 1, 1, 1, "models/thesunrise/frigate_wreck.mdl", 4, 1)
+AddNewShip("T1 Hermes Frigate",65000, "models/thesunrise/balduran/frigate4.mdl", 75, 100, 30, 1500, 50, 24, 6000, 0.1, 1, 0, "models/thesunrise/balduran/frigate4_wreck.mdl", 3, 1)
+AddNewShip("T2 Hermes Frigate",150000, "models/thesunrise/balduran/frigate4.mdl", 50, 75, 30, 2100, 75, 24, 7500, 0.1, 2, 0, "models/thesunrise/balduran/frigate4_wreck.mdl", 2.5, 1)
+AddNewShip("T1 Mule Frigate", 10000, "models/thesunrise/balduran/frigate5-1.mdl", 100, 100, 30, 300, 100, 16, 2500, 0.5, 1, 1, "models/thesunrise/balduran/frigate5_wreck.mdl", 5, 1)
+AddNewShip("T2 Mule Frigate", 16000, "models/thesunrise/balduran/frigate5-2.mdl", 150, 100, 30, 350, 150, 16, 2750, 0.5, 1, 0, "models/thesunrise/balduran/frigate5_wreck.mdl", 5, 1)
+AddNewShip("T3 Mule Frigate", 23000, "models/thesunrise/balduran/frigate5-3.mdl", 200, 150, 30, 400, 200, 16, 3000, 0.5, 1, 2, "models/thesunrise/balduran/frigate5_wreck.mdl", 5, 1)
+AddNewShip("T4 Mule Frigate", 35000, "models/thesunrise/balduran/frigate5-4.mdl", 200, 150, 30, 450, 250, 16, 3250, 0.5, 1, 3, "models/thesunrise/balduran/frigate5_wreck.mdl", 5, 1)
+AddNewShip("T5 Mule Frigate", 60000, "models/thesunrise/balduran/frigate5-5.mdl", 250, 200, 30, 500, 300, 16, 4500, 0.4, 1, 0, "models/thesunrise/balduran/frigate5_wreck.mdl", 5, 1)
+AddNewShip("T1 Hammer Frigate", 67000, "models/thesunrise/balduran/frigate5-1.mdl", 600, 500, 30, 240, 30, 16, 2750, 0.5, 1, 0, "models/thesunrise/balduran/frigate5_wreck.mdl", 4, 1)
+AddNewShip("T1 Nalaan Frigate", 110000, "models/thesunrise/balduran/frigate_miner.mdl", 200, 100, 30, 325, 400, 16, 3250, 0.5, 1, 0, "models/thesunrise/balduran/frigate_miner_wreck.mdl", 5, 1)
+AddNewShip("Turtle Freighter", 500000, "models/thesunrise/balduran/freighter1.mdl", 700, 600, 55, 300, 1200, 8, 4125, 1, 2, 3, "models/thesunrise/balduran/freighter1_wreck.mdl", 7.5, 2)
+AddNewShip("T2 Turtle Freighter", 1500000, "models/thesunrise/balduran/freighter1.mdl", 1400, 1300, 55, 400, 2400, 7, 4300, 1, 4, 2, "models/thesunrise/balduran/freighter1_wreck.mdl", 8, 3)
+AddNewShip("Nomad Freighter", 500000, "models/thesunrise/balduran/freighter2.mdl", 300, 400, 55, 600, 800, 8, 4800, 1, 2, 0, "models/thesunrise/freighter2_wreck.mdl", 6, 2)
+AddNewShip("T1 Armadillo Cruiser", 100000, "models/thesunrise/balduran/cruiser1-1.mdl", 1500, 1000, 40, 480, 30, 12, 4000, 2, 2, 0, "models/thesunrise/cruiser_wreck.mdl", 8, 3)
+AddNewShip("T2 Armadillo Cruiser", 800000, "models/thesunrise/balduran/cruiser1-2.mdl", 2500, 2000, 40, 400, 30, 12, 4000, 2, 2, 1, "models/thesunrise/cruiser_wreck.mdl", 8, 3)
+AddNewShip("T1 Arrow Cruiser", 100000, "models/thesunrise/balduran/cruiser4-1.mdl", 1100, 550, 40, 560, 35, 40, 5600, 0.7, 2, 1, "models/thesunrise/balduran/cruiser4_wreck.mdl", 6.5, 3)
+AddNewShip("T2 Arrow Cruiser", 500000, "models/thesunrise/balduran/cruiser4-2.mdl", 1200, 700, 40, 640, 35, 40, 6000, 0.6, 2, 3, "models/thesunrise/balduran/cruiser4_wreck.mdl", 6.5, 3)
+AddNewShip("T3 Arrow Cruiser", 1000000, "models/thesunrise/balduran/cruiser4-3.mdl", 1300, 900, 40, 720, 35, 40, 6400, 0.5, 2, 0, "models/thesunrise/balduran/cruiser4_wreck.mdl", 6.5, 3)
+AddNewShip("T1 Orodral Cruiser", 200000, "models/thesunrise/balduran/cruiser3-1.mdl", 700, 400, 40, 400, 450, 3, 4000, 2, 2, 0, "models/thesunrise/balduran/cruiser3_wreck.mdl", 8, 3)
+AddNewShip("T2 Orodral Cruiser", 300000, "models/thesunrise/balduran/cruiser3-2.mdl", 750, 420, 40, 400, 500, 3, 4000, 2, 2, 2, "models/thesunrise/balduran/cruiser3_wreck.mdl", 8, 3)
+AddNewShip("T3 Orodral Cruiser", 400000, "models/thesunrise/balduran/cruiser3-3.mdl", 800, 450, 40, 400, 550, 3, 4000, 2, 2, 1, "models/thesunrise/balduran/cruiser3_wreck.mdl", 8, 3)
+AddNewShip("T1 Freelancer Cruiser", 500000, "models/thesunrise/balduran/cruiser2-2.mdl", 1500, 800, 40, 560, 35, 32, 5600, 0.7, 2, 1, "models/thesunrise/cruiser_wreck.mdl", 8, 3)
+AddNewShip("T2 Freelancer Cruiser", 800000, "models/thesunrise/balduran/cruiser2-3.mdl", 1600, 900, 40, 640, 55, 32, 6000, 0.6, 2, 1, "models/thesunrise/cruiser_wreck.mdl", 8, 3)
+AddNewShip("T3 Freelancer Cruiser", 1500000, "models/thesunrise/balduran/cruiser2-4.mdl", 1700, 1000, 40, 720, 85, 32, 6400, 0.5, 2, 1, "models/thesunrise/cruiser_wreck.mdl", 8, 3)
+AddNewShip("T1 Terran Battle Cruiser", 3000000, "models/thesunrise/articus/battlecruiser3.mdl", 2000, 1500, 40, 800, 120, 60, 7500, 0.4, 2, 1, "models/thesunrise/cruiser_wreck.mdl", 4, 3)
+AddNewShip("Phoenix Dreadnought", 15000000, "models/thesunrise/balduran/juggernaught1.mdl", 5000, 7500, 40, 400, 1000, 20, 6500, 1, 7, 1, "models/thesunrise/cruiser_wreck.mdl", 10, 4)
+AddNewShip("Juggernaught", 25000000, "models/thesunrise/balduran/juggernaught1.mdl", 8000, 9000, 40, 350, 2800, 150, 6000, 1, 8, 3, "models/thesunrise/cruiser_wreck.mdl", 9.7, 4)
+AddNewShip("Raiden Titan", 50000000, "models/thesunrise/balduran/titan1.mdl", 10000, 10000, 40, 300, 3000, 100, 7500, 1, 10, 3, "models/thesunrise/titan_wreck.mdl", 10, 4)
+AddNewShip("#INF",1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000, "models/thesunrise/balduran/alien_ship.mdl", 100000, 100000, 80, 700, 50000, 240, 10000, 0.1, 1, 0, "models/thesunrise/balduran/frigate4_wreck.mdl", 1, 4)
+
+
+
+local meta = FindMetaTable("Player")
+
+function meta:GetShip()
+	return self:GetNWEntity("Ship",NULL)
+end
+
+function meta:GetType()
+	return self:GetNWString("meta_shipmdl","")
+end
+
+function GetShipTable(a)
+	return SHIPS[tonumber(a)] or ""
+end
+
+function ShipIDToString(a)
+	return SHIPS[tonumber(a)].name or ""
+end
+
+function ShipStringToID(a)
+	for k,v in pairs(SHIPS) do
+		if v.name == a then
+			return k
+		end
+	end
+end
+
+function GetShipPrice(a)
+	return SHIPS[a].cost or 0
+end
+
+function GetShipValue(a)
+	return SHIPS[tonumber(a)].Value or 0
+end
+
+function GetShipModel(a)
+	return SHIPS[a].Model
+end
+
+function GetShipSkin(a)
+	return SHIPS[a].Skin
+end
+
+function GetShipMan(a)
+	return SHIPS[a].Skin
+end
+
+
 function Shop()
 	local DermaPanel = vgui.Create( "DFrame" )
 	DermaPanel:SetPos(((ScrW() - 700) * 0.5),((ScrH() - 500) * 0.5))
@@ -403,7 +511,7 @@ function Shop()
 		local item = SellList:GetSelected()[1]
 		if item then
 			RunConsoleCommand("sun_sell", item:GetColumnText(1), SellNumbers:GetValue())
-			//DebugPrint("sun_sell, "..item:GetColumnText(1)..", "..SellNumbers:GetValue())
+			////DebugPrint("sun_sell, "..item:GetColumnText(1)..", "..SellNumbers:GetValue())
 			timer.Simple(0.5,function() SellUpdateList() end)
 		end
 	end
@@ -455,7 +563,7 @@ function Shop()
 		local item = BuyList:GetSelected()[1]
 		if(item) then
 			RunConsoleCommand("sun_buy", item:GetColumnText(1), BuyNumbers:GetValue())
-			DebugPrint("sun_buy, "..item:GetColumnText(1)..", "..BuyNumbers:GetValue())
+			//DebugPrint("sun_buy, "..item:GetColumnText(1)..", "..BuyNumbers:GetValue())
 		end
 	end
 
@@ -470,8 +578,8 @@ function Shop()
 		surface.SetDrawColor( 50, 50, 50, 255 )
 		surface.DrawRect( 0, 0, Ship:GetWide(), Ship:GetTall() )
 	end
-	/*
-	local BuyNumbers2 = vgui.Create( "DNumSlider", Ship )
+	
+	/*local BuyNumbers2 = vgui.Create( "DNumSlider", Ship )
 	BuyNumbers2:SetPos(520, 10)
 	BuyNumbers2:SetSize(150, 50)
 	BuyNumbers2:SetText( "Insurance Percent" )
@@ -481,17 +589,17 @@ function Shop()
 	BuyNumbers2:SetValue(1)
 	
 	BuyNumbers:GetValue()
-	
-	local inLabel= vgui.Create("DLabel", Ship)
-	local price = GetShipPrice(ShipStringToID(GetShipTable(LocalPlayer():GetShip():GetType()).name))
-	hook.Add("HUDPaint", "Insurance", function()
-	if BuyNumbers2 then
-	local price = GetShipPrice(ShipStringToID(GetShipTable(LocalPlayer():GetShip():GetType()).name))
-	inLabel:SetText("Cost: $"..price * ((BuyNumbers2:GetValue() / 100)*0.1))
-	end
-	end)
-	inLabel:SetPos( 520, 55)
-	inLabel:SetSize( 100, 20)
+	*/
+	//local inLabel= vgui.Create("DLabel", Ship)
+	//local price = 0 //GetShipPrice(ShipStringToID(GetShipTable(LocalPlayer():GetType()).name))
+	//hook.Add("HUDPaint", "Insurance", function()
+	//if BuyNumbers2 then
+	//local price = 0 //GetShipPrice(ShipStringToID(GetShipTable(LocalPlayer():GetType()).name))
+	//inLabel:SetText("Cost: $"..price * ((BuyNumbers2:GetValue() / 100)*0.1))
+	//end
+	//end)
+	//inLabel:SetPos( 520, 55)
+	//inLabel:SetSize( 100, 20)
 	
 	
 	local ShipButton = vgui.Create( "DButton", Ship )
@@ -502,12 +610,12 @@ function Shop()
 		local amount = BuyNumbers2:GetValue()
 		if(amount) then
 			RunConsoleCommand("sun_insure", amount)
-			DebugPrint("sun_insure, "..amount)
+			//DebugPrint("sun_insure, "..amount)
 		end
 	end
-	*/
 	
-	/*local ShipModel = vgui.Create( "DModelPanel", Ship )
+	
+	local ShipModel = vgui.Create( "DModelPanel", Ship )
 	ShipModel:SetPos( 300, 5 )
 	ShipModel:SetSize( 300, 300 )
 	ShipModel:SetModel( SHIPS[1].Model )
@@ -516,7 +624,7 @@ function Shop()
 	ShipModel:SetAnimated( false )
 	ShipModel:SetAmbientLight( Color( 50, 50, 50 ) )
 	ShipModel:SetCamPos(Vector(10,14,8))
-	ShipModel:SetLookAt(ZeroVect)
+	ShipModel:SetLookAt(-Vector(1))
 	ShipModel:SetFOV( 70 )
 	
 	local ShipList = vgui.Create("DListView")
@@ -556,12 +664,12 @@ function Shop()
 		local item = ShipList:GetSelected()[1]
 		if(item) then
 			RunConsoleCommand("sun_buyship", item:GetColumnText(1))
-			DebugPrint("sun_buyship, "..item:GetColumnText(1))
+			//DebugPrint("sun_buyship, "..item:GetColumnText(1))
 			timer.Simple(0.5,function() ShipUpdateList() end)
 		end
-	end*/
+	end
 	
-	/*
+	
 
 	
 	local hpLabel= vgui.Create("DLabel", Ship)
@@ -603,8 +711,8 @@ function Shop()
 	PropertySheet:AddSheet( "Ship", Ship, "gui/silkicons/user", false, false, "Ship" )
 	
 	
-	*/
-	/*
+	
+	
 
 	--Sell Tab
 	local SellShip = vgui.Create( "DPanel" )
@@ -623,12 +731,11 @@ function Shop()
 	
 	PropertySheet:AddSheet( "Sell Ship", SellShip, "gui/silkicons/user", false, false, "Sell Ship" )
 	
-*/
+
 	
 	
 	
 	
-/*
 
 
 	--Hangar Tab
@@ -656,7 +763,7 @@ function Shop()
 	ShipModel2:SetAnimated( false )
 	ShipModel2:SetAmbientLight( Color( 50, 50, 50 ) )
 	ShipModel2:SetCamPos(Vector(10,14,8))
-	ShipModel2:SetLookAt(ZeroVect)
+	ShipModel2:SetLookAt(-Vector(1))
 	ShipModel2:SetFOV( 70 )
 	
 	function HangarList:OnRowSelected( LineID, Line )
@@ -672,9 +779,9 @@ function Shop()
 
 		function HangarUpdateList()
 		HangarList:Clear()
-		for k,v in pairs(Hangar) do
-				HangarList:AddLine(v)
-		end
+		//for k,v in pairs(Hangar) do
+				//angarList:AddLine(v)
+		//end
 	end
 	HangarUpdateList()
 	
@@ -692,7 +799,7 @@ function Shop()
 	end
 	
 	PropertySheet:AddSheet( "Hangar", Hangar2, "gui/silkicons/user", false, false, "Hangar" )
-	*/
+	
 	
 	
 	

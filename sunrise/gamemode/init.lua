@@ -30,6 +30,7 @@ end)
 function GM:PlayerSpawn(ply)
     ply.Cargo = {}
     ply:SetNWString("Cargo_Sel","")
+    
     Cargo:Set(ply,1,{Name = "Miner",Amt = 1}) 
     ply:SetNWInt("DeathTimer",60)
     ply:SetCollisionGroup(COLLISION_GROUP_WEAPON)
@@ -48,6 +49,7 @@ function GM:PlayerSpawn(ply)
         ply.ent.GetShipOwner = ply
         ply.ent:Spawn()
         ply.ent:Activate()
+        ply:SetNWString("meta_shipmdl",ply.ent:GetModel())
     ply:Spectate( OBS_MODE_CHASE )
 	ply:SpectateEntity( ply.ent )
 end
