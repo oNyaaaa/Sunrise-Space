@@ -1,6 +1,5 @@
 AddCSLuaFile("shared.lua")
 AddCSLuaFile("cl_init.lua")
-AddCSLuaFile("cargo/cl_cargo.lua")
 include("weps/wepons.lua")
 
 include("shared.lua")
@@ -24,8 +23,14 @@ end)
 
 local SpawnOffset = 700
 
+concommand.Add("select_star_attk", function(ply,cmd,args)
+    ply:SetNWString("Cargo_Sel",tostring(args[1]))
+end)
+
 function GM:PlayerSpawn(ply)
-    ply:CrosshairDisable()
+    ply.Cargo = {}
+    ply:SetNWString("Cargo_Sel","")
+    Cargo:Set(ply,1,{Name = "Miner",Amt = 1}) 
     ply:SetNWInt("DeathTimer",60)
     ply:SetCollisionGroup(COLLISION_GROUP_WEAPON)
     ply.cDock = false

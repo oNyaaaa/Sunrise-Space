@@ -13,6 +13,8 @@ Weapons.Add("Miner",function(self,ship)
     if ent == NULL then return end
     if not IsValid(ent.Entity) then return end
     if ent.Entity:GetPos():Distance(ship:GetPos()) <= 500 then
+        ship:SetNWInt("Rock",ship:GetNWInt("Rock")+math.random(5,10))
+        Cargo:Set(ship,2,{Name = "Rock", Amt = ship:GetNWInt("Rock")}) 
         local ed = EffectData()
         ed:SetEntity(ent.Entity)
         ed:SetStart(ship:GetPos())
@@ -23,7 +25,7 @@ end)
 
 function WepShoot(self,ply)
     for k,v in pairs(WepTbl) do
-        if v[1] == "Miner" then
+        if v[1] == ply:GetNWString("Cargo_Sel","") then
             v[2](self,ply)
         end
     end

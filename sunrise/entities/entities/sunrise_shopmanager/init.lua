@@ -158,12 +158,12 @@ function ENT:Think()
 		self.NextRandomSounda = CurTime()+math.random(40,50)
 	end*/
 end
-
+util.AddNetworkString("sun_shop")
 
 function ENT:AcceptInput(inp,ply,caller)    
 	if inp == "Use" and ply:IsPlayer() and ply:KeyPressed(32) then
-		umsg.Start("sun_shop",ply)
-		umsg.End()
+		net.Start("sun_shop")
+		net.Send(caller)
 		/*if self.NextRandomSound <= CurTime() and self.NextSound <= CurTime() and self.NextDamageSound <= CurTime() then
 			local sound = table.Random(self.UseSounds)
 			self:EmitSound(sound,100,100)
