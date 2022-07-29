@@ -40,7 +40,9 @@ function ENT:Think()
 		return
 	end
 	if self.Target:GetPos():Distance(self:GetPos()) < 500 and self.NextFire <= CurTime() then
-		self:Shoot(self.Target)
+		//if self.Target.IsPirate == true or self.Target.IsHostile == true then
+			self:Shoot(self.Target)
+		//end
 	end
 	self:NextThink(CurTime()+0.1)
 end
@@ -52,7 +54,8 @@ end
 function ENT:FindTarget()
 	for _,v in pairs(ents.FindInSphere(self:GetPos(),500)) do
 		if v.IsPirate or v.IsHostile == true then
-			self.Target = v:GetShip()
+			self:SetNWEntity("Ship",v.ent)
+			self.Target = self:GetNWEntity("Ship",nil)
 			break
 		end
 	end
@@ -73,7 +76,15 @@ function ENT:KeyValue(k,v)
 end
 
 function ENT:Shoot(ent)
-	local func = CW_GetFunction(self.Weap)
+	local func = function(a,b,c,d)
+		local ed = EffectData()
+		ed:SetEntity(d) 
+		ed:SetOrigin(b:GetPos())
+		ed:SetMagnitude(1.5)
+		util.Effect("sunrise_laser",ed)
+		self:TakeDMG(self.Target)
+		self.Target:EmitSound("sunrise/weapons/laser_0"..tostring(math.random(1,2))..".wav", 100,50)
+	end
 	if ent and ent:IsValid() and self.NextFire <= CurTime() and type(func) == "function" then
 		local td = {}
 		td.start = self:GetPos()
@@ -81,14 +92,16 @@ function ENT:Shoot(ent)
 		td.filter = {self}
 		local t = util.TraceLine(td)
 		for i=1,self.NumShots do
-			timer.Simple(i*self.ShotDelay,func,t,self,self.Damage,ent)
+			timer.Simple(i*self.ShotDelay, function() func(t,self,self.Damage,ent) end)
 		end
 		self.NextFire = CurTime()+(self.NextFireDelay+(self.NumShots/2))
 	end
 end
 
-function ENT:TakeDMG(a,b)
-	//Disable DMG
+function ENT:TakeDMG(a)
+	if not IsValid(a) then return end
+	a.Health_Ship = a.Health_Ship - 50
+	if a.Health_Ship <= 0 then a:Die() end
 	return
 end
 

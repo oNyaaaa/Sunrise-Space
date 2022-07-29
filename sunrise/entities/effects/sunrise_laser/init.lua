@@ -7,17 +7,17 @@ local Laser = Material("trails/physbeam")
 
 function EFFECT:Init(data)
 	self.Ent		= data:GetEntity()
-	if !self.Ent then return end
+	if !IsValid(self.Ent) then return end
 	self.StartPos	= self.Ent:GetPos()
 	self.ExpPos		= data:GetOrigin()
 	self.Scale		= data:GetMagnitude()/1000
 	self.Emitter	= ParticleEmitter(self.ExpPos)
 	self.Time		= CurTime()+1
 	self.Size		= self.Time-CurTime()
-	self:SetRenderBounds(-1*NilVect*100000,NilVect*100000)
+	self:SetRenderBounds(-1*Vector(-1)*100000,Vector(-1)*100000)
 	for i=3,9 do
 		local part = self.Emitter:Add("particle/light01",self.ExpPos)
-		part:SetVelocity(ZeroVect)
+		part:SetVelocity(Vector(0))
 		part:SetDieTime(4)
 		part:SetStartAlpha(math.Rand(230, 250))
 		part:SetEndAlpha(0)
@@ -26,8 +26,7 @@ function EFFECT:Init(data)
 		part:SetRoll(math.Rand(20,80))
 		part:SetRollDelta(math.random(-1,1))
 		part:SetColor(255,226,174)
-		part:VelocityDecay(true)
-	end
+		end
 	local part2 = self.Emitter:Add("effects/sunflare",self.ExpPos)
 	part2:SetDieTime(3)
 	part2:SetStartAlpha(math.Rand(230,250))
@@ -47,7 +46,7 @@ function EFFECT:Think()
 end
 
 function EFFECT:Render()
-	if !self.Ent then return end
+	if !IsValid(self.Ent) then return end
 	render.SetMaterial(Laser) 
 	render.DrawBeam(self.StartPos,self.ExpPos,0.3,0,0,Color(255,255,122.5,255))
 end

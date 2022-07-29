@@ -200,7 +200,6 @@ if Cargo == nil then Cargo = {} end
 
 net.Receive("Cargo_Resc", function()
     local rec = net.ReadTable()
-    PrintTable(rec)
 	Cargo = rec
 end)
 

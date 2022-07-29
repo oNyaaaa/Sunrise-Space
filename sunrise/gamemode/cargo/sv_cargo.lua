@@ -9,8 +9,10 @@ function Cargo:Get(ply)
     return ply.Cargo or {}
 end
 
-function Cargo:Set(ply,id,cargo) 
-    ply.Cargo[tostring(id)] = cargo
+function Cargo:Set(ply,cargo) 
+    if not table.HasValue(ply.Cargo,cargo) then
+        table.insert(ply.Cargo,cargo)
+    end
     net.Start("Cargo_Resc")
         net.WriteTable(ply.Cargo or {})
     net.Send(ply)

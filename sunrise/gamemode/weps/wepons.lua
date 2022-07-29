@@ -23,6 +23,27 @@ Weapons.Add("Miner",function(self,ship)
     end
 end)
 
+Weapons.Add("Lazor",function(self,ship)
+    if cooldown == nil then cooldown = 0 end
+    if cooldown >= CurTime() then return end
+    cooldown = CurTime() + 2
+    local ent = self:GetTrace(ship)
+    if ent == NULL then return end
+    if not IsValid(ent.Entity) then return end
+    if ent.Entity:GetPos():Distance(ship:GetPos()) <= 500 then
+       // ship:SetNWInt("Rock",ship:GetNWInt("Rock")+math.random(5,10))
+        //Cargo:Set(ship,2,{Name = "Rock", Amt = ship:GetNWInt("Rock")}) 
+        local ed = EffectData()
+	    ed:SetEntity(ship)
+	    ed:SetOrigin(targ:GetPos())
+	    ed:SetMagnitude(0.3)
+	    util.Effect("sunrise_laser",ed)
+        //d = d or math.random(5,15)
+        //targ:TakeDMG(d,ship)
+        ship:EmitSound("sunrise/weapons/laser_0"..tostring(math.random(1,2))..".wav", 100,50)
+    end
+end)
+
 function WepShoot(self,ply)
     for k,v in pairs(WepTbl) do
         if v[1] == ply:GetNWString("Cargo_Sel","") then

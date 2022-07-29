@@ -13,10 +13,10 @@ function ENT:Initialize()
 		phys:EnableGravity(false)
 	end
 	self.Trail = util.SpriteTrail(self,0,Color(150,150,150,150),false,2,0,1.2,0.125,"trails/physbeam.vmt")
-	
+	self.Health_Ship = 100
 end
 
-function ENT:Die(a)
+function ENT:Die()
 	local ply = self:GetOwner_OfShip()
 	if not IsValid(ply) then return end
 	local e = ents.Create("sunrise_wreck")
@@ -68,8 +68,12 @@ function ENT:GetTrace(ship,a)
 	return util.TraceHull(td)
 end
 
-
 function ENT:Think()
+	for _,v in pairs(ents.FindInSphere(self:GetPos(),500)) do
+		if v:GetClass() == "sunrise_wreck" then
+			v:Remove()
+		end
+	end
     local ship = self:GetOwner_OfShip()
     local phys = self:GetPhysicsObject()
 	if ship:GetNWBool("Docked",false) == true then
