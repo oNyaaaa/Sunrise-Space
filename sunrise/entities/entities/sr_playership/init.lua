@@ -53,19 +53,23 @@ function ENT:PhysicsCollide(data,physobj)
 	end
 end
 
-local Mins = Vector(-9,-10,-5)
-local Maxs = Vector(27,6,5)
-
-function ENT:GetTrace(ship,a)
-	// a <= 0 then return {} end
-	local ply = ship
-	local td = {}
-	td.start = self:GetPos()
-	td.endpos = self:GetPos()+(ply:GetAimVector()*(a or 500))
-	td.filter = {ply,self}
-	td.mins = Mins
-	td.maxs = Maxs
-	return util.TraceHull(td)
+function ENT:GetTrace(ship)
+	local distance = 0
+	local pos
+	local ConeEnts = ents.FindInSphere(self:GetPos(), 500)
+	for k,v in pairs(ConeEnts) do
+		if self.GetShipOwner != v then
+			if v:GetClass() == "sunrise_pirate" or v:GetClass() == "sr_playership" or v:GetClass() == "sunrise_asteroid" then
+				local dist = v:GetPos():Distance(ship:GetPos())
+				if distance < dist  then
+					pos = v
+				end
+				
+				distance = dist
+			end
+		end
+	end
+	return pos,dist
 end
 
 function ENT:Think()

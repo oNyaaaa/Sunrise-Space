@@ -44,16 +44,7 @@ function ENT:Initialize()
 	self.Trail = util.SpriteTrail(self,0,Color(150,150,150,150),false,2,0,1.2,0.125,"trails/physbeam.vmt")
 end
 
-function ENT:TakeDMG(a,b)
-	a = math.Round(a)
-	self.NextShield = CurTime()+10
-	if !self.Target and self.Target != self then
-		self.Target = b
-	end
-	if self.Shield > 0 then
-		self.Shield = math.Clamp(self.Shield-tonumber(a),0,100)
-		return
-	end
+function ENT:TakeDMG(a)
 	self.aHealth = self.aHealth-a
 	if self.aHealth <= 0 then
 		self:Die(b)
@@ -90,7 +81,7 @@ function ENT:Think()
 	if targ != NULL and IsValid(targ) and targ then
 		local phys = self:GetPhysicsObject()
 		self:SetAngles((targ:GetPos()-self:GetPos()):Angle())
-		phys:SetVelocity(self:GetForward() * 100)
+		//phys:SetVelocity(self:GetForward() * 100)
 	end
 	///print(targ)
 	/*if self.NextShield <= CurTime() then

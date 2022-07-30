@@ -10,9 +10,7 @@ function Cargo:Get(ply)
 end
 
 function Cargo:Set(ply,cargo) 
-    if not table.HasValue(ply.Cargo,cargo) then
-        table.insert(ply.Cargo,cargo)
-    end
+    ply.Cargo[cargo.Name] = cargo
     net.Start("Cargo_Resc")
         net.WriteTable(ply.Cargo or {})
     net.Send(ply)
