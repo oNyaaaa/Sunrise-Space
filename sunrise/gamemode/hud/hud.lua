@@ -32,7 +32,7 @@ end
 
 local function DrawHP()
 	local MaxHP = 100 //LocalPlayer():GetShip():GetMaxHP()
-	local HP = 100 //LocalPlayer():GetShip():GetHP()
+	local HP = tonumber(LocalPlayer():GetShip():GetNWFloat("Health",0)) //LocalPlayer():GetShip():GetHP()
 	local MaxShield = 100//LocalPlayer():GetShip():GetMaxShield()
 	local Shield = 100 //LocalPlayer():GetShip():GetShield()
 
@@ -59,7 +59,7 @@ local function DrawHP()
 	
 	Y = Y - 40
 	
-	Frac = math.Clamp(Shield / MaxShield,0,1)
+	/*Frac = math.Clamp(Shield / MaxShield,0,1)
 
 	draw.RoundedBox(4, X - 3, Y - 3, 236, 26, Color(18,34,79,255))
 
@@ -67,6 +67,7 @@ local function DrawHP()
 	surface.DrawRect(X,Y,Wide * Frac,Tall)
 
 	draw.SimpleText(math.Round((Shield / MaxShield) * 100) .. "%", "Default", X + 120, Y + 10 , Color(255,255,255,255),TEXT_ALIGN_CENTER,TEXT_ALIGN_CENTER)
+	*/
 end
 
 local function DrawSpaceObjects()

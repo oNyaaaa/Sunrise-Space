@@ -13,7 +13,14 @@ function ENT:Initialize()
 		phys:EnableGravity(false)
 	end
 	self.Trail = util.SpriteTrail(self,0,Color(150,150,150,150),false,2,0,1.2,0.125,"trails/physbeam.vmt")
-	self.Health_Ship = 100
+	self:SetNWFloat("Health",100)
+end
+
+function ENT:TakeDMG(a)
+	self:SetNWFloat("Health",self:GetNWFloat("Health")-a)
+	if tonumber(self:GetNWFloat("Health")) <= 0 then
+		self:Die(b)
+	end
 end
 
 function ENT:Die()

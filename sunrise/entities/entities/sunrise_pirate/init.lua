@@ -42,6 +42,7 @@ function ENT:Initialize()
 		phys:EnableGravity(false)
 	end
 	self.Trail = util.SpriteTrail(self,0,Color(150,150,150,150),false,2,0,1.2,0.125,"trails/physbeam.vmt")
+	self.NextShot = 0 
 end
 
 function ENT:TakeDMG(a)
@@ -68,7 +69,7 @@ function ENT:GetMaxSpeed()
 end
 
 function ENT:FindTarget()
-	for _,v in pairs(ents.FindInSphere(self:GetPos(),2300)) do 
+	for _,v in pairs(ents.FindInSphere(self:GetPos(),500)) do 
 		if v:GetClass() == "sr_playership" then //v != self and !v.Pirate then
 			self.Target = v
 			return v
@@ -76,12 +77,29 @@ function ENT:FindTarget()
 	end
 end
 
+
+function ENT:Shoot(ent)
+	if self.NextShot <= CurTime() then
+		if ent and ent:IsValid() then
+			local td = {}
+			td.start = self:GetPos()
+			td.endpos = ent:GetPos()+Vector(math.random(-self.Acc,self.Acc),math.random(-self.Acc,self.Acc),math.random(-self.Acc,self.Acc))
+			td.filter = {self}
+			local t = util.TraceLine(td)
+			WepShootPirate(self,ent)
+			self.NextShot = CurTime()+self.ShotDelay
+		end
+	end
+end
+
+
 function ENT:Think()
 	local targ = self:FindTarget()
 	if targ != NULL and IsValid(targ) and targ then
 		local phys = self:GetPhysicsObject()
 		self:SetAngles((targ:GetPos()-self:GetPos()):Angle())
-		//phys:SetVelocity(self:GetForward() * 100)
+		phys:SetVelocity(self:GetForward() * 100)
+		self:Shoot(targ)
 	end
 	///print(targ)
 	/*if self.NextShield <= CurTime() then
@@ -121,18 +139,6 @@ end
 
 function ENT:GetHP()
 	return self.aHealth or 0
-end
-
-function ENT:Shoot(ent)
-	if ent and ent:IsValid() and self.NextShot <= CurTime() then
-		local td = {}
-		td.start = self:GetPos()
-		td.endpos = ent:GetPos()+Vector(math.random(-self.Acc,self.Acc),math.random(-self.Acc,self.Acc),math.random(-self.Acc,self.Acc))
-		td.filter = {self}
-		local t = util.TraceLine(td)
-		CW_GetFunction(self.Weap)(t,self,self.Damage,ent)
-		self.NextShot = CurTime()+self.ShotDelay
-	end
 end
 
 function ENT:PhysicsUpdate(phys,dtime)
