@@ -65,7 +65,11 @@ function meta:GetOwner_OfShip()
     return ply
 end
 
-
+function meta:GetShipOwners()
+    local ply = self.GetShipOwner
+    ply:SetNWEntity("Ship",self)
+    return ply
+end
 
 function GM:PlayerDeath(ply,inf,attk)
     if ply.ent then ply.ent:Remove() end

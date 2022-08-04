@@ -75,14 +75,16 @@ local function DrawSpaceObjects()
 	if ply:GetNWBool("Docked",false) == true then
         return
     end
-	/*for _,v in pairs(ents.FindByClass("sunrise_pirate")) do
-		local spos2 = v:GetPos():ToScreen()
-		surface.SetDrawColor(222,8,8,167)
-		surface.DrawLine(spos2.x-2,spos2.y-5,spos2.x+2,spos2.y-5)
-		surface.DrawLine(spos2.x-2,spos2.y+5,spos2.x+2,spos2.y+5)
-		surface.DrawLine(spos2.x-5,spos2.y-2,spos2.x-5,spos2.y+2)
-		surface.DrawLine(spos2.x+5,spos2.y-2,spos2.x+5,spos2.y+2)
-	end*/
+	for _,v in pairs(ents.FindByClass("sunrise_pirate")) do
+		if v:GetPos():Distance(LocalPlayer():GetPos()) <= 2000 then
+			local spos2 = v:GetPos():ToScreen()
+			surface.SetDrawColor(222,8,8,167)
+			surface.DrawLine(spos2.x-2,spos2.y-5,spos2.x+2,spos2.y-5)
+			surface.DrawLine(spos2.x-2,spos2.y+5,spos2.x+2,spos2.y+5)
+			surface.DrawLine(spos2.x-5,spos2.y-2,spos2.x-5,spos2.y+2)
+			surface.DrawLine(spos2.x+5,spos2.y-2,spos2.x+5,spos2.y+2)
+		end
+	end
 	for _,v in pairs(ents.FindByClass("sunrise_asteroidfield")) do
 		local spos = v:GetPos():ToScreen()
 		//if ply:GetShip():GetTarget() == v then
@@ -459,7 +461,7 @@ function GM:HUDPaint()
 		x, y = coords.x, coords.y
 
 	else
-		x, y = ScrW() / 2.0, ScrH() / 2.0 
+		x, y = ScrW() / 2.0, ScrH() / 1.7 
 	end
 	
 	local scale = 10 

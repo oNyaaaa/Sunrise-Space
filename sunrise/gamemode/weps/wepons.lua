@@ -16,15 +16,15 @@ Weapons.Add("Miner",function(self,ship)
     if cooldown == nil then cooldown = 0 end
     if cooldown >= CurTime() then return end
     cooldown = CurTime() + 2
-    local ent = self:GetTrace(ship)
-    if ent == NULL then return end
-    if not IsValid(ent) then return end
-    if ent:GetPos():Distance(ship:GetPos()) <= 500 then
-        if ent:GetClass() == "sunrise_asteroid" then 
+    local ent = self:GetTrace(2000)
+    if ent.Entity == NULL then return end
+    if not IsValid(ent.Entity) then return end
+    if ent.Entity:GetPos():Distance(ship:GetPos()) <= 500 then
+        if ent.Entity:GetClass() == "sunrise_asteroid" then 
             ship:SetNWInt("Rock",ship:GetNWInt("Rock")+math.random(5,10))
             Cargo:Set(ship,{Name = "Rock", Amt = ship:GetNWInt("Rock")}) 
             local ed = EffectData()
-            ed:SetEntity(ent)
+            ed:SetEntity(ent.Entity)
             ed:SetStart(ship:GetPos())
             util.Effect("sunrise_mininglaser",ed)
             ship:EmitSound("sunrise/weapons/laser_0"..tostring(math.random(1,2))..".wav", 100,50)
@@ -36,17 +36,18 @@ Weapons.Add("Lazor",function(self,ship)
     if cooldown == nil then cooldown = 0 end
     if cooldown >= CurTime() then return end
     cooldown = CurTime() + 2
-    local ent = self:GetTrace(ship,100)
-    if ent == NULL then return end
-    if not IsValid(ent) then return end
-    if ent:GetPos():Distance(ship:GetPos()) <= 500 then
+   // local ent = self:GetTrace(ship,100)
+    local ent = self:GetTrace(2000)
+    if ent.Entity == NULL then return end
+    if not IsValid(ent.Entity) then return end
+    if ent.Entity:GetPos():Distance(ship:GetPos()) <= 500 then
        // Weapons.DmgTake(ship)
         local ed = EffectData()
-	    ed:SetEntity(ent)
+	    ed:SetEntity(ent.Entity)
 	    ed:SetOrigin(ship:GetPos())
 	    ed:SetMagnitude(0.3)
 	    util.Effect("sunrise_laser",ed)
-        if ent.TakeDMG != nil then ent:TakeDMG(10) end
+        if ent.Entity.TakeDMG != nil then ent.Entity:TakeDMG(10) end
         //d = d or math.random(5,15)
         //targ:TakeDMG(d,ship)
         ship:EmitSound("sunrise/weapons/laser_0"..tostring(math.random(1,2))..".wav", 100,50)

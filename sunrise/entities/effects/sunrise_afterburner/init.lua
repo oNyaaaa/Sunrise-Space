@@ -2,7 +2,7 @@
 	Sunrise - A new era
 	Do not edit or change unless with premission of the sunrise dev's
 */
-
+local NilVect = Vector(-1)
 function EFFECT:Init(data)
 	self.Ent = data:GetEntity()
 	self.Scale = data:GetScale()
@@ -28,6 +28,7 @@ function EFFECT:Render()
 		part:SetRoll(math.Rand(20,80))
 		part:SetRollDelta(math.random(-1,1))
 		part:SetColor(0,0,200)
+		self.Emitter:Finish()
 		self.LastPos = self.Ent:GetPos()
 	end
 end

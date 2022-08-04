@@ -60,8 +60,33 @@ function ENT:PhysicsCollide(data,physobj)
 	end
 end
 
+local Mins = Vector(-9,-10,-5)
+local Maxs = Vector(27,6,5)
+
+function ENT:GetTrace(a)
+	//if (a or -1) <= 0 then return {} end
+	local ply = self:GetShipOwners()
+	local td = {}
+	td.start = (ply:GetEyeTrace().HitPos)
+	td.endpos = ply:GetEyeTrace().HitPos+(ply:GetAimVector()*(a or 500))
+	td.filter = {ply,self}
+	td.mins = Mins
+	td.maxs = Maxs
+	return util.TraceHull(td)
+end
+
+--[[
 function ENT:GetTrace(ship)
-	local distance = 0
+	//
+	local tr = util.TraceLine( {
+		start = ship:GetShootPos(),
+		endpos = ship:GetShootPos() + ship:GetAimVector() * 100,
+		//filter = function( ent ) return ( ent:GetClass() == "prop_physics" ) end
+	} )
+	
+	return tr.Entity
+		//return ship.PlayerTrace.HitPos
+	/*local distance = 0
 	local pos
 	local ConeEnts = ents.FindInSphere(self:GetPos(), 500)
 	for k,v in pairs(ConeEnts) do
@@ -76,8 +101,8 @@ function ENT:GetTrace(ship)
 			end
 		end
 	end
-	return pos,dist
-end
+	return pos,dist*/
+end##]]
 
 function ENT:Think()
 	for _,v in pairs(ents.FindInSphere(self:GetPos(),500)) do
