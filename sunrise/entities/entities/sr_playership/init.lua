@@ -12,7 +12,7 @@ function ENT:Initialize()
 		phys:Wake()
 		phys:EnableGravity(false)
 	end
-	self.Trail = util.SpriteTrail(self,0,Color(150,150,150,150),false,2,0,1.2,0.125,"trails/physbeam.vmt")
+	//self.Trail = util.SpriteTrail(self,0,Color(150,150,150,150),false,2,0,1.2,0.125,"trails/physbeam.vmt")
 	self:SetNWFloat("Health",100)
 end
 
@@ -105,6 +105,7 @@ function ENT:GetTrace(ship)
 end##]]
 
 function ENT:Think()
+	
 	for _,v in pairs(ents.FindInSphere(self:GetPos(),500)) do
 		if v:GetClass() == "sunrise_wreck" then
 			v:Remove()
@@ -121,22 +122,32 @@ function ENT:Think()
 			WepShoot(self,ship)
 		end
 		if ship:KeyDown(IN_SPEED) then
-			phys:SetVelocity(self:GetForward() * 500)
+			phys:SetVelocity(self:GetForward() * 200)
 			self:SetAngles(ship:EyeAngles())
+			self:SetNWBool("SetFlame",true)
+			self:SetNWBool("SetFlameLength",true)
 			return
 		end
         if ship:KeyDown(IN_ATTACK2) and not ship:KeyDown(IN_FORWARD) then
             self:SetAngles(ship:EyeAngles())
+			self:SetNWBool("SetFlame",false)
+			self:SetNWBool("SetFlameLength",false)
         end
         if ship:KeyDown(IN_FORWARD) and ship:KeyDown(IN_ATTACK2) then
             self:SetAngles(ship:EyeAngles())
             phys:SetVelocity(self:GetForward() * 100)
+			self:SetNWBool("SetFlame",true)
+			self:SetNWBool("SetFlameLength",false)
         end
         if ship:KeyDown(IN_FORWARD) then
             phys:SetVelocity(self:GetForward() * 100)
+			self:SetNWBool("SetFlame",true)
+			self:SetNWBool("SetFlameLength",false)
         end
         if ship:KeyDown(IN_BACK) then
             phys:SetVelocity(self:GetForward() * 0)
+			self:SetNWBool("SetFlame",false)
+			self:SetNWBool("SetFlameLength",false)
         end
     end
     

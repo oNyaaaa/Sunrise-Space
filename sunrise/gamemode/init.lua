@@ -30,7 +30,6 @@ end)
 function GM:PlayerSpawn(ply)
     ply.Cargo = {}
     ply:SetNWString("Cargo_Sel","")
-    
     Cargo:Set(ply,{Name = "Miner",Amt = 1}) 
     Cargo:Set(ply,{Name = "Lazor",Amt = 1}) 
     ply:SetNWInt("DeathTimer",60)
