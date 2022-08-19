@@ -15,3 +15,10 @@ function Cargo:Set(ply,cargo)
         net.WriteTable(ply.Cargo or {})
     net.Send(ply)
 end
+
+function Cargo:Remove(ply,cargo) 
+    ply.Cargo[cargo.Name] = nil
+    net.Start("Cargo_Resc")
+        net.WriteTable(ply.Cargo or {})
+    net.Send(ply)
+end

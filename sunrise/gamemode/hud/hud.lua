@@ -26,7 +26,7 @@ local function TopBar()
 	
 	sunrisetime = os.date("%I:%M:%S %p")
 	draw.SimpleText("Time - "..sunrisetime, "Default", Wide-75, 17, Color(255, 255, 255, 255),TEXT_ALIGN_CENTER,TEXT_ALIGN_CENTER)
-	draw.SimpleText("Money: 0","Default",50,17,Color(255,255,255,255),TEXT_ALIGN_CENTER,TEXT_ALIGN_CENTER)
+	draw.SimpleText("Money: "..tostring(LocalPlayer():GetNWInt("Money",0)),"Default",50,17,Color(255,255,255,255),TEXT_ALIGN_CENTER,TEXT_ALIGN_CENTER)
 	//draw.SimpleText("Cargo: "..tostring(cargo).."/"..tostring(LocalPlayer():GetShip():GetMaxCargo()),"Hud",150,17,Color(255,255,255,255),TEXT_ALIGN_CENTER,TEXT_ALIGN_CENTER)
 end
 

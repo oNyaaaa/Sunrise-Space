@@ -1,5 +1,6 @@
 AddCSLuaFile("shared.lua")
 AddCSLuaFile("cl_init.lua")
+AddCSLuaFile("weps/wepons.lua")
 include("weps/wepons.lua")
 
 include("shared.lua")

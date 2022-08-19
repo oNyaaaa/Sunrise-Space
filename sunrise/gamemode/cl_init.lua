@@ -1,5 +1,5 @@
 include("shared.lua")
-
+include("weps/wepons.lua")
 include("hud/hud.lua")
 
 local HELP = {}
@@ -398,7 +398,7 @@ AddNewShip("T1 Terran Battle Cruiser", 3000000, "models/thesunrise/articus/battl
 AddNewShip("Phoenix Dreadnought", 15000000, "models/thesunrise/balduran/juggernaught1.mdl", 5000, 7500, 40, 400, 1000, 20, 6500, 1, 7, 1, "models/thesunrise/cruiser_wreck.mdl", 10, 4)
 AddNewShip("Juggernaught", 25000000, "models/thesunrise/balduran/juggernaught1.mdl", 8000, 9000, 40, 350, 2800, 150, 6000, 1, 8, 3, "models/thesunrise/cruiser_wreck.mdl", 9.7, 4)
 AddNewShip("Raiden Titan", 50000000, "models/thesunrise/balduran/titan1.mdl", 10000, 10000, 40, 300, 3000, 100, 7500, 1, 10, 3, "models/thesunrise/titan_wreck.mdl", 10, 4)
-AddNewShip("#INF",1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000, "models/thesunrise/balduran/alien_ship.mdl", 100000, 100000, 80, 700, 50000, 240, 10000, 0.1, 1, 0, "models/thesunrise/balduran/frigate4_wreck.mdl", 1, 4)
+//AddNewShip("#INF",1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000, "models/thesunrise/balduran/alien_ship.mdl", 100000, 100000, 80, 700, 50000, 240, 10000, 0.1, 1, 0, "models/thesunrise/balduran/frigate4_wreck.mdl", 1, 4)
 
 
 
@@ -481,35 +481,35 @@ function Shop()
 	SellList:SetMultiSelect(false)
 	SellList:AddColumn("Name")
 	SellList:AddColumn("Amount")
-	SellList:AddColumn("Price")
+	SellList:AddColumn("Sell Price")
 	
 	--This is becuse i want to be able to update the list when someone sells somthing
 	function SellUpdateList()
 		SellList:Clear()
 		for k,v in pairs(Cargo) do
-			SellList:AddLine(k,v.Name,v.Amt)
+			SellList:AddLine(v.Name,v.Amt,50)
 		end
 	end
 	
 	SellUpdateList()
 	
-	local SellNumbers = vgui.Create( "DNumSlider", Sell )
+	/*local SellNumbers = vgui.Create( "DNumSlider", Sell )
 	SellNumbers:SetPos(520, 10)
 	SellNumbers:SetSize(150, 50)
 	SellNumbers:SetText( "Sell Amount" )
 	SellNumbers:SetMin(1)
 	SellNumbers:SetMax(1000)
 	SellNumbers:SetDecimals(0)
-	SellNumbers:SetValue(1)
+	SellNumbers:SetValue(1)*/
 	
 	local SellButton = vgui.Create( "DButton", Sell )
 	SellButton:SetText( "Sell" )
-	SellButton:SetPos( 520, 60 )
+	SellButton:SetPos( 520, 10 )
 	SellButton:SetSize( 150, 40 )
 	SellButton.DoClick = function()
 		local item = SellList:GetSelected()[1]
 		if item then
-			RunConsoleCommand("sun_sell", item:GetColumnText(1), SellNumbers:GetValue())
+			RunConsoleCommand("sun_sell", item:GetColumnText(1))
 			////DebugPrint("sun_sell, "..item:GetColumnText(1)..", "..SellNumbers:GetValue())
 			timer.Simple(0.5,function() SellUpdateList() end)
 		end
@@ -534,13 +534,14 @@ function Shop()
 	BuyList:SetMultiSelect(false)
 	BuyList:AddColumn("Name")
 	BuyList:AddColumn("Price")
-	
+
 	--This is becuse i want to be able to update the list when someone sells somthing
 	function BuyUpdateList()
 		BuyList:Clear()
-		//for _,v in pairs(SIM_GetAllItems()) do
-		//	BuyList:AddLine(v,SIM_GetPrice(v))
-		//end
+		for _,v in pairs(Weps_Sim_Get.Get()) do
+			if v[2] == false then continue; end
+			BuyList:AddLine(v[1],v[3])
+		end
 	end
 	
 	BuyUpdateList()
@@ -562,7 +563,6 @@ function Shop()
 		local item = BuyList:GetSelected()[1]
 		if(item) then
 			RunConsoleCommand("sun_buy", item:GetColumnText(1), BuyNumbers:GetValue())
-			//DebugPrint("sun_buy, "..item:GetColumnText(1)..", "..BuyNumbers:GetValue())
 		end
 	end
 
