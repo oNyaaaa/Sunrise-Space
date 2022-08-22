@@ -1,6 +1,10 @@
 include("shared.lua")
 include("weps/wepons.lua")
 include("hud/hud.lua")
+print([[We now have an official Server ->
+]===============[]==============[
+=Sunrise Server -> 185.38.151.49:27080
+]===============[]==============[]])
 
 local HELP = {}
 HELP[1] =	{
