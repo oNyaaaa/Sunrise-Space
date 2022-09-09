@@ -70,6 +70,7 @@ local function DrawHP()
 	*/
 end
 
+
 local function DrawSpaceObjects()
 	local ply = LocalPlayer()
 	if ply:GetNWBool("Docked",false) == true then
@@ -85,19 +86,33 @@ local function DrawSpaceObjects()
 			surface.DrawLine(spos2.x+5,spos2.y-2,spos2.x+5,spos2.y+2)
 		end
 	end
-	for _,v in pairs(ents.FindByClass("sunrise_asteroidfield")) do
+	for _,v in pairs(ents.FindByClass("sunrise_asteroid")) do
 		local spos = v:GetPos():ToScreen()
 		//if ply:GetShip():GetTarget() == v then
 			//surface.SetDrawColor(50,222,50,190)
 		//else
 			surface.SetDrawColor(222,222,222,190)
 		//end
-		surface.DrawLine(spos.x-2,spos.y-5,spos.x+2,spos.y-5)
-		surface.DrawLine(spos.x-2,spos.y+5,spos.x+2,spos.y+5)
-		surface.DrawLine(spos.x-5,spos.y-2,spos.x-5,spos.y+2)
-		surface.DrawLine(spos.x+5,spos.y-2,spos.x+5,spos.y+2)
-		draw.SimpleText(tostring(math.ceil((ply:GetPos():Distance(v:GetPos())))).." km.","TargetIDSmall",spos.x+20,spos.y-10,Color(200,200,255,200))
-		draw.SimpleText("Asteroid Field "..tostring(v:EntIndex()),"TargetIDSmall",spos.x+20,spos.y-2,Color(255,255,255,200))
+		
+		if v.Emitter == nil then v.Emitter = NULL end
+		if v.Emitter == NULL then v.Emitter = ParticleEmitter(v:GetPos()) end
+		local particle = v.Emitter:Add("sprites/glow04_noz", v:GetPos() )
+			particle:SetVelocity( VectorRand()*148 )
+			particle:SetDieTime(1)
+			particle:SetStartAlpha(215)
+			particle:SetEndAlpha(0)
+			particle:SetStartSize(22)
+			particle:SetEndSize(1)
+			particle:SetRoll(math.Rand(0, 360))
+			particle:SetRollDelta(math.Rand(-1, 1))
+			particle:SetAirResistance(512)
+			particle:SetColor( 255,255,255 )
+		//surface.DrawLine(spos.x-2,spos.y-5,spos.x+2,spos.y-5)
+		//surface.DrawLine(spos.x-2,spos.y+5,spos.x+2,spos.y+5)
+		//surface.DrawLine(spos.x-5,spos.y-2,spos.x-5,spos.y+2)
+		//surface.DrawLine(spos.x+5,spos.y-2,spos.x+5,spos.y+2)
+		//draw.SimpleText(tostring(math.ceil((ply:GetPos():Distance(v:GetPos())))).." km.","TargetIDSmall",spos.x+20,spos.y-10,Color(200,200,255,200))
+		//draw.SimpleText("Asteroid Field "..tostring(v:EntIndex()),"TargetIDSmall",spos.x+20,spos.y-2,Color(255,255,255,200))
 	end
 	for _,v in pairs(ents.FindByClass("sunrise_station")) do
 		//if ply:GetShip():GetTarget() == v then

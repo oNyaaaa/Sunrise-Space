@@ -2,12 +2,17 @@ include('shared.lua')
 
 function ENT:Initialize()
 	self.Emitter = ParticleEmitter(self:GetPos())
+	self.Body = ClientsideModel(self:GetModel(),RENDERGROUP_TRANSLUCENT)
+	self.Body:SetMaterial("Models/effects/vol_light001")
+	self.Body:SetPos(self:GetPos()+Vector(0,0,0))
+	self:SetParent(self.Body)
 end
 
 function ENT:Draw()
 	self:DrawModel()
 	if self:GetNWBool("SetFlame",false) == false then return end
-	local flames = self.Emitter:Add("sprites/glow04_noz",self:GetPos())
+	self.Body:SetPos(self:GetPos()+Vector(0,0,0))
+	local flames = self.Emitter:Add("sprites/glow04_noz",self.Body:GetPos())
 	flames:SetVelocity(self:GetForward()*-2)
 	flames:SetDieTime(0.1)
 	flames:SetStartAlpha(255)

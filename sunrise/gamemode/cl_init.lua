@@ -1,10 +1,6 @@
 include("shared.lua")
 include("weps/wepons.lua")
 include("hud/hud.lua")
-print([[We now have an official Server ->
-]===============[]==============[
-=Sunrise Server -> 185.38.151.49:27080
-]===============[]==============[]])
 
 local HELP = {}
 HELP[1] =	{
@@ -17,13 +13,14 @@ HELP[2] =	{
 				"Click here for help",
 				"Flying Basics and game controls",
 				"",
-				"Increase Speed: W",
-				"Decrease Speed: S",
-				"Select Objects: E",
-				"Warp Speed: Shift",
-				"Turn Ship: right Mouse Button",
-				"Inventory: Q",
-				"Fire Equipment: Left Mouse Button",
+				"Increase Speed: W (+Forward)",
+				"Decrease Speed: S (+Back)",
+				"Select Objects: E (+Use)",
+				"Warp Speed: Shift (+Speed)",
+				"Turn Ship: right Mouse Button (+Attack2)",
+				"Inventory: Q + (+Menu)",
+				"Fire Equipment: Left Mouse Button (+Attack)",
+				"Stealth: R (+Reload)"
 			}
 
 HELP[4] =	{

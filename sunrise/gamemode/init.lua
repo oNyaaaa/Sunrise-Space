@@ -11,11 +11,6 @@ AddCSLuaFile("hud/hud.lua")
 include("dock/docking.lua")
 include("pirate/pirate.lua")
 
-print([[We now have an official Server ->
-]===============[]==============[
-=Sunrise Server -> 185.38.151.49:27080
-]===============[]==============[]])
-
 util.AddNetworkString("sun_openundockmenu")
 util.AddNetworkString("sun_opendockmenu")
 

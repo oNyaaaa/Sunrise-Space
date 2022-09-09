@@ -14,6 +14,8 @@ function ENT:Initialize()
 	end
 	//self.Trail = util.SpriteTrail(self,0,Color(150,150,150,150),false,2,0,1.2,0.125,"trails/physbeam.vmt")
 	self:SetNWFloat("Health",100)
+	self.Stealth = false
+	self.Stealth_CD = 0
 end
 
 function ENT:TakeDMG(a)
@@ -75,6 +77,23 @@ function ENT:GetTrace(a)
 	return util.TraceHull(td)
 end
 
+function ENT:Stealths()
+	if self.Stealth_CD == nil then self.Stealth_CD = 0 end
+	if self.Stealth_CD >= CurTime() then return end
+	self.Stealth_CD = CurTime() + 1
+	if self.Stealth == true then
+		self:SetMaterial("Models/effects/vol_light001")
+		timer.Simple(30, function() self:SetMaterial("") end)
+		self.Stealth = false 
+		return
+	end
+	if self.Stealth == false then
+		self:SetMaterial("")
+		self.Stealth = true 
+		return
+	end
+end
+
 function ENT:Think()
 	
 	for _,v in pairs(ents.FindInSphere(self:GetPos(),500)) do
@@ -92,6 +111,7 @@ function ENT:Think()
 		if ship:KeyDown(IN_ATTACK) then
 			WepShoot(self,ship)
 		end
+		if ship:KeyDown(IN_RELOAD) then self:Stealths() end
 		if ship:KeyDown(IN_USE) then
 			local trg = self:GetTrace(10000)
 			if trg.Entity && IsValid(trg.Entity) then
