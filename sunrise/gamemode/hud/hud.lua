@@ -432,14 +432,14 @@ function DrawPlayers()
 				
 				Nick = v:Nick()
 				
-				surface.SetFont( "ScoreboardText" )
+				surface.SetFont( "Default" )
 				local w = surface.GetTextSize( Nick )
 				local teamColor = team.GetColor( v:Team() )
 				ow = w
 				w = w + 26
 				
 				draw.RoundedBox( 6, dPos.x-((w+10)/2), dPos.y-10, w+10, 25, Color(0, 0, 0, dAlpha) )
-				draw.DrawText( Nick, "ScoreboardText", dPos.x + 14, dPos.y-6, Color(teamColor.r, teamColor.g, teamColor.b, dAlpha), 1 )
+				draw.DrawText( Nick, "Default", dPos.x + 14, dPos.y-6, Color(teamColor.r, teamColor.g, teamColor.b, dAlpha), 1 )
 				surface.SetTexture( Icon )
 				surface.SetDrawColor( 255, 255, 255, dAlpha)
 				surface.DrawTexturedRect(dPos.x - (ow / 2) - 12, dPos.y - 6, 16, 16)
